@@ -1,7 +1,6 @@
 # Metal–Oxide RRAM  
 
 ><font face="Times New Roman" >Wong H S P, Lee H Y, Yu S, et al. Metal–oxide RRAM[J]. Proceedings of the IEEE, 2012, 100(6): 1951-1970.</font>
-
 ***
 
 - **写作目的：**
@@ -18,8 +17,8 @@
 
   ![fig1-1](https://raw.githubusercontent.com/posvirus/Image_storage/main/fig1-1.png)
 
-  - 单极型Reset—电流热激活— $\text{O}^{2-}$扩散；双极型Reset—反偏电场驱动— $\text{O}^{2-}$漂移。
-  - 一些值得关注的氧化层材料： $\text{HfO}_\text{x}$(High K)， $\text{AlO}_\text{x}$(提升均匀性)， $\text{NiO}$(1D1R结构)， $\text{TiO}_\text{x}$， $\text{TaO}_\text{x}$(耐久性好)。
+  - 单极型Reset—电流热激活—$\text{O}^{2-}$扩散；双极型Reset—反偏电场驱动— $\text{O}^{2-}$漂移。
+  - 一些值得关注的氧化层材料：$\text{HfO}_\text{x}$(High K)，$\text{AlO}_\text{x}$(提升均匀性)，$\text{NiO}$(1D1R结构)， $\text{TiO}_\text{x}$，$\text{TaO}_\text{x}$(耐久性好)。
   - 1T1R结构中的MOSFET充当了良好的电流限制器。
   - 触点RRAM通过直接在MOSFET的源极/漏极触点上制造RRAM，最大限度地减少了晶体管和RRAM之间互连的寄生电容。
   - RRAM空间的非均匀性与改进：
@@ -50,9 +49,8 @@
 
 ---
 
-# Effect of Moisture Stress on the Resistance of  $\text{HfO}_2/\text{TaO}_\text{x}$-Based 8-Layer 3D Vertical Resistive Random Access Memory  
+#Effect of Moisture Stress on the Resistance of $\text{HfO}_2/\text{TaO}_\text{x}$-Based 8-Layer 3D Vertical Resistive Random Access Memory  
 ><font face="Times New Roman" >Gao R, Lei D, He Z, et al. Effect of Moisture Stress on the Resistance of HfO 2/TaO x-Based 8-Layer 3D Vertical Resistive Random Access Memory[J]. IEEE Electron Device Letters, 2019, 41(1): 38-41.</font>
-
 ---
 
 - **实验目的：**
@@ -78,13 +76,13 @@
 
 - **实验内容：**
 
-  - 对独立设备，测定其 $I-V$关系， $R_\text{HRS}$， $R_\text{LRS}$，电阻窗口， $I_\text{Reset}$随水分应力施加的退化。
-  - 施加24h烘烤探究 $R_\text{HRS}$， $R_\text{LRS}$，电阻窗口， $I_\text{Reset}$退化的可恢复性。
+  - 对独立设备，测定其$I-V$关系，$R_\text{HRS}$，$R_\text{LRS}$，电阻窗口，$I_\text{Reset}$随水分应力施加的退化。
+  - 施加24h烘烤探究$R_\text{HRS}$，$R_\text{LRS}$，电阻窗口，$I_\text{Reset}$退化的可恢复性。
   - 对VRRAM的不同层（8层）分别进行测定，探究水分应力影响的层依赖性。
 
 - **实验结果：**
 
-  - $R_\text{HRS}$与电阻窗口随施加应力的时间推移而减少， $I_\text{Reset}$随时间推移而增加，且上述退化几乎无法恢复：
+  - $R_\text{HRS}$与电阻窗口随施加应力的时间推移而减少，$I_\text{Reset}$随时间推移而增加，且上述退化几乎无法恢复：
 
   <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220821101959136.png" alt="image-20220821101959136" style="zoom:150%;" />![image-20220821102012337](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220821102012337.png)
 
@@ -102,7 +100,7 @@
 
   ![image-20220821102233738](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220821102233738.png)<img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220821102243264.png" alt="image-20220821102243264" style="zoom:150%;" />
 
-  - **resistance window/电阻窗口**：应该是指 $R_\text{HRS}-R_\text{LHS}$，一般希望越大越好。
+  - **resistance window/电阻窗口**：应该是指$R_\text{HRS}-R_\text{LHS}$，一般希望越大越好。
   - 水分应力会引入额外的缺陷：
 
   ![image-20220821102359624](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220821102359624.png)
@@ -111,7 +109,6 @@
 
 # Filament-Free Bulk Resistive Memory Enables Deterministic Analogue Switching  
 ><font face="Times New Roman" >Li Y, Fuller E J, Sugar J D, et al. Filament‐Free Bulk Resistive Memory Enables Deterministic Analogue Switching[J]. Advanced Materials, 2020, 32(45): 2003984.</font>
-
 ---
 
 - **写作目的：**
@@ -120,7 +117,7 @@
 
 - **内容记录：**
 
-  - **CF-RRAM**与**Bulk-RRAM**的对比（此处讨论的CF-RRAM的复位电流是 $\text{O}^{2-}$被热激活扩散形成，因此应该是**单极型RRAM**）：
+  - **CF-RRAM**与**Bulk-RRAM**的对比（此处讨论的CF-RRAM的复位电流是$\text{O}^{2-}$被热激活扩散形成，因此应该是**单极型RRAM**）：
 
   <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220821102724785.png" alt="image-20220821102724785" style="zoom:80%;" />
 
@@ -133,7 +130,7 @@
 
   ![image-20220821102842766](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220821102842766.png)
 
-  - Bulk-RRAM本质上是一种ECRAM，它与一般ECRAM相比的优势在于其在小尺寸微缩时能保持耐久性（此处用 $\tau_{RC}$表征）几乎不变：
+  - Bulk-RRAM本质上是一种ECRAM，它与一般ECRAM相比的优势在于其在小尺寸微缩时能保持耐久性（此处用$\tau_{RC}$表征）几乎不变：
 
   ![image-20220821102922076](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220821102922076.png)
 
@@ -144,18 +141,17 @@
 
 ---
 
-# Impact of Multilevel Retention Characteristics on RRAM based DNN Inference Engine  
+#Impact of Multilevel Retention Characteristics on RRAM based DNN Inference Engine  
 ><font face="Times New Roman" >Shim W, Meng J, Peng X, et al. Impact of multilevel retention characteristics on RRAM based DNN inference engine[C]//2021 IEEE International Reliability Physics Symposium (IRPS). IEEE, 2021: 1-4.</font>
-
 ---
 
 - **实验目的：**
 
-  探究温度对多级 $\text{HfO}_2$-RRAM保留特性的影响，以及对DNN推理精度的影响。
+  探究温度对多级$\text{HfO}_2$-RRAM保留特性的影响，以及对DNN推理精度的影响。
 
 - **实验内容：**
 
-  - 使用单个RRAM单元表示4位权重（2 $\times$2），分别探究4种阻态在不同温度下的电导漂移情况，并最终测试不同温度下推理精度随时间的变化情况。
+  - 使用单个RRAM单元表示4位权重（2$\times$2），分别探究4种阻态在不同温度下的电导漂移情况，并最终测试不同温度下推理精度随时间的变化情况。
 
 - **实验结果：**
 
@@ -163,7 +159,7 @@
 
   ![image-20220821103316279](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220821103316279.png)![image-20220821103323408](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220821103323408.png)
 
-  - 建模得出电导期望 $\mu$与方差 $\sigma$随时间与温度的变化模型：
+  - 建模得出电导期望$\mu$与方差$\sigma$随时间与温度的变化模型：
 
   $$
   \Delta \mu=\mu(t)-\mu_\text{init}=A_\text{avg}\times\log t\\
@@ -174,7 +170,7 @@
 
   ![image-20220821103633109](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220821103633109.png)![image-20220821103642603](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220821103642603.png)
 
-  - 在具有1-4个权重的DNN推理模拟中，推理精度在55 $^\circ C$及以上会显著下降。
+  - 在具有1-4个权重的DNN推理模拟中，推理精度在55$^\circ C$及以上会显著下降。
 
 - **批注：**
 
@@ -185,27 +181,26 @@
 
 ---
 
-# Impact of the Atomic Layer-Deposited Ru Electrode Surface Morphology on Resistive Switching Properties of  $\text{TaO}_\text{x}$‑Based Memory Structures  
+#Impact of the Atomic Layer-Deposited Ru Electrode Surface Morphology on Resistive Switching Properties of $\text{TaO}_\text{x}$‑Based Memory Structures  
 
 ><font face="Times New Roman" >Koroleva A A, Chernikova A G, Chouprik A A, et al. Impact of the atomic layer-deposited Ru electrode surface morphology on resistive switching properties of TaOx-based memory structures[J]. ACS Applied Materials & Interfaces, 2020, 12(49): 55331-55341.</font>
-
 ---
 
 - **实验目的：**
 
-  探究通过REALD生成的Ru电极的表面形态对 $\text{TaO}_\text{x}$-RRAM的RS特性的影响。
+  探究通过REALD生成的Ru电极的表面形态对$\text{TaO}_\text{x}$-RRAM的RS特性的影响。
 
 - **实验方法：**
 
-  - 为保证实验时 $\text{Ru}$的表面覆盖率约为1，防止 $\text{TaO}_\text{x}$与 $\text{TiN}$相互反应的干扰，将实验的REALD周期数设为45以上。
-  - 考虑 $\text{TaO}_\text{x}$与$\text{TiN}$生成 $\text{TiO}_2$层可能的影响（实验表明影响不大）。
-  - 设置空白对照组，将经过不同周期ALD处理的 $\text{TiN}$/$\text{Ru}$/$\text{TaO}_\text{x}$/$\text{Ta}$器件与 $\text{TiN}$/$\text{TaO}_\text{x}$/$\text{Ta}$器件RS特性进行对比。
+  - 为保证实验时$\text{Ru}$的表面覆盖率约为1，防止$\text{TaO}_\text{x}$与$\text{TiN}$相互反应的干扰，将实验的REALD周期数设为45以上。
+  - 考虑$\text{TaO}_\text{x}$与$\text{TiN}$生成$\text{TiO}_2$层可能的影响（实验表明影响不大）。
+  - 设置空白对照组，将经过不同周期ALD处理的$\text{TiN}$/$\text{Ru}$/$\text{TaO}_\text{x}$/$\text{Ta}$器件与$\text{TiN}$/$\text{TaO}_\text{x}$/$\text{Ta}$器件RS特性进行对比。
 
 - **实验内容：**
 
   - 分别测定不同ALD周期数下（0/60/110/200/500）器件BE的表面粗糙度。
   - 分别测定不同ALD周期数下（0/110/500）器件首次DC $I-V$曲线以及通过对同一器件多个样本测定的Forming电压大小。
-  - 分别**多次**测定不同ALD周期数下（0/60/110/200/500）器件RS特性以及 $R_\text{HRS}$， $R_\text{LRS}$的分布。
+  - 分别**多次**测定不同ALD周期数下（0/60/110/200/500）器件RS特性以及$R_\text{HRS}$，$R_\text{LRS}$的分布。
   - 分别**多次**测定不同ALD周期数下（0/60/110/200/500）器件的开关电压，耐久性（开关周期数）。
   - 分别测定不同ALD周期数下（0/110/200/500）器件的保持特性。
   - 就ALD周期数为500的器件具体研究其开关特性并给出原理解释。
@@ -213,11 +208,11 @@
 
 - **实验结果：**
 
-  - **BE的表面粗糙度随ALD周期数增加而增加，形成较厚的 $\text{Ru}$层。**
+  - **BE的表面粗糙度随ALD周期数增加而增加，形成较厚的$\text{Ru}$层。**
   - Forming电压的均值与方差均随ALD周期数增加而减小。
-  -  $R_\text{HRS}/R_\text{LRS}$随ALD周期数增加而增大（说明电阻窗口更大），且阻态稳定性更强（方差更小）[1]。
+  - $R_\text{HRS}/R_\text{LRS}$随ALD周期数增加而增大（说明电阻窗口更大），且阻态稳定性更强（方差更小）[1]。
   - 开关周期数随ALD周期数的增加而增加，器件开关电压的绝对值随ALD周期数的增加而变小。
-  - 器件的保持特性随ALD周期数的增加而改善，具体表现为 $R_\text{HRS}$与$R_\text{LRS}$的稳定性增强[2]。
+  - 器件的保持特性随ALD周期数的增加而改善，具体表现为$R_\text{HRS}$与$R_\text{LRS}$的稳定性增强[2]。
 
   - 随ALD周期数增加，CF数量变少，但强度与稳定性增加。
 
@@ -225,24 +220,23 @@
 
 - **实验结论：**
 
-  通过REALD生长的 $\text{Ru}$电极的粗糙度（厚度）与 $\text{TiN}$/$\text{Ru}$/$\text{TaO}_\text{x}$/$\text{Ta}$器件的RS特性相关，粗糙的 $\text{Ru}$电极能降低器件的Forming与开关电压，提高器件的电阻窗口、耐久性、均匀性与保持特性，有助于增强器件性能与可靠性。
+  通过REALD生长的$\text{Ru}$电极的粗糙度（厚度）与$\text{TiN}$/$\text{Ru}$/$\text{TaO}_\text{x}$/$\text{Ta}$器件的RS特性相关，粗糙的$\text{Ru}$电极能降低器件的Forming与开关电压，提高器件的电阻窗口、耐久性、均匀性与保持特性，有助于增强器件性能与可靠性。
 
 - **批注：**
 
   - **SCLC**：空间电荷限制电流。
-  - [1]：为什么ALD周期数由200 $\rightarrow$500时， $R_\text{HRS}$的方差反而变大？
-  - [2]：  $R_\text{HRS}$会随时间推移而增大，使电阻窗口变大
+  - [1]：为什么ALD周期数由200$\rightarrow$500时，$R_\text{HRS}$的方差反而变大？
+  - [2]： $R_\text{HRS}$会随时间推移而增大，使电阻窗口变大
   - **本实验中，对RS特性起主要影响的是BE的粗糙度，而导致BE粗糙度不同的是ALD工艺的周期数。**
-  - 一次完整的Set-Reset过程中的 $I-V$特性及解释：
+  - 一次完整的Set-Reset过程中的$I-V$特性及解释：
 
   ![image-20220821105605727](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220821105605727.png)![image-20220821105613397](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220821105613397.png)
 
 ---
 
-# Understanding memristive switching via in situ characterization and device modeling  
+#Understanding memristive switching via in situ characterization and device modeling  
 
 ><font face="Times New Roman" >Sun W, Gao B, Chi M, et al. Understanding memristive switching via in situ characterization and device modeling[J]. Nature communications, 2019, 10(1): 1-13.</font>
-
 ---
 
 - **写作目的：**
@@ -281,4 +275,3 @@
   - 参数的随机可变性与器件的耐久性不是MOSFET面临的挑战，因为MOSFET是多子器件。相比之下，忆阻器件中的SR是通过有限数量的离子迁移通过切换层或在电极/切换层界面实现的，因此控制参与的离子更具挑战性。
 
 ---
-
