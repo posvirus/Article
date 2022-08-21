@@ -40,7 +40,7 @@
 # Analog-Type Resistive Switching Devices for Neuromorphic Computing  
 
 ><font face="Times New Roman">Zhang W, Gao B, Tang J, et al. Analog‐type resistive switching devices for neuromorphic computing[J]. physica status solidi (RRL)–Rapid Research Letters, 2019, 13(10): 1900204.</font>
-
+---
 - **写作目的：**
 
   本文主要介绍模拟型RRAM的若干种模拟开关机制，并针对模拟型RRAM在神经形态计算方面的应用提出优化建议。
@@ -82,7 +82,7 @@
 
 #Synaptic electronics: materials, devices and applications  
 ><font face="Times New Roman">Kuzum D, Yu S, Wong H S P. Synaptic electronics: materials, devices and applications[J]. Nanotechnology, 2013, 24(38): 382001.</font>
-
+---
 - **写作目的：**
 
   介绍**突触电子学**（Synaptic electronics）的相关内容，主要包括：可用于模拟突触的相关器件、突触器件的性能指标、包含突触器件的相关计算应用。
