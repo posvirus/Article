@@ -17,8 +17,8 @@
 
   ![fig1-1](https://raw.githubusercontent.com/posvirus/Image_storage/main/fig1-1.png)
 
-  - 单极型Reset—电流热激活—$\text{O}^{2-}$扩散；双极型Reset—反偏电场驱动— $\text{O}^{2-}$漂移。
-  - 一些值得关注的氧化层材料：$\text{HfO}_\text{x}$(High K)，$\text{AlO}_\text{x}$(提升均匀性)，$\text{NiO}$(1D1R结构)， $\text{TiO}_\text{x}$，$\text{TaO}_\text{x}$(耐久性好)。
+  - 单极型Reset—电流热激活— $\text{O}^{2-}$扩散；双极型Reset—反偏电场驱动— $\text{O}^{2-}$漂移。
+  - 一些值得关注的氧化层材料：$\text{HfO}_ \text{x}$ (High K)，$\text{AlO}_ \text{x}$(提升均匀性)，$\text{NiO}$(1D1R结构)， $\text{TiO}_ \text{x}$，$\text{TaO}_\text{x}$(耐久性好)。
   - 1T1R结构中的MOSFET充当了良好的电流限制器。
   - 触点RRAM通过直接在MOSFET的源极/漏极触点上制造RRAM，最大限度地减少了晶体管和RRAM之间互连的寄生电容。
   - RRAM空间的非均匀性与改进：
