@@ -50,7 +50,7 @@
 
 ---
 
-#Effect of Moisture Stress on the Resistance of $\text{HfO}_2/\text{TaO}_\text{x}$-Based 8-Layer 3D Vertical Resistive Random Access Memory  
+# Effect of Moisture Stress on the Resistance of $\text{HfO}_2/\text{TaO}_\text{x}$-Based 8-Layer 3D Vertical Resistive Random Access Memory  
 ><font face="Times New Roman" >Gao R, Lei D, He Z, et al. Effect of Moisture Stress on the Resistance of HfO 2/TaO x-Based 8-Layer 3D Vertical Resistive Random Access Memory[J]. IEEE Electron Device Letters, 2019, 41(1): 38-41.</font>
 
 ---
@@ -144,7 +144,7 @@
 
 ---
 
-#Impact of Multilevel Retention Characteristics on RRAM based DNN Inference Engine  
+# Impact of Multilevel Retention Characteristics on RRAM based DNN Inference Engine  
 ><font face="Times New Roman" >Shim W, Meng J, Peng X, et al. Impact of multilevel retention characteristics on RRAM based DNN inference engine[C]//2021 IEEE International Reliability Physics Symposium (IRPS). IEEE, 2021: 1-4.</font>
 
 ---
@@ -185,7 +185,7 @@
 
 ---
 
-#Impact of the Atomic Layer-Deposited Ru Electrode Surface Morphology on Resistive Switching Properties of $\text{TaO}_\text{x}$‑Based Memory Structures  
+# Impact of the Atomic Layer-Deposited Ru Electrode Surface Morphology on Resistive Switching Properties of $\text{TaO}_\text{x}$‑Based Memory Structures  
 
 ><font face="Times New Roman" >Koroleva A A, Chernikova A G, Chouprik A A, et al. Impact of the atomic layer-deposited Ru electrode surface morphology on resistive switching properties of TaOx-based memory structures[J]. ACS Applied Materials & Interfaces, 2020, 12(49): 55331-55341.</font>
 
@@ -239,7 +239,7 @@
 
 ---
 
-#Understanding memristive switching via in situ characterization and device modeling  
+# Understanding memristive switching via in situ characterization and device modeling  
 
 ><font face="Times New Roman" >Sun W, Gao B, Chi M, et al. Understanding memristive switching via in situ characterization and device modeling[J]. Nature communications, 2019, 10(1): 1-13.</font>
 
