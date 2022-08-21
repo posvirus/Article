@@ -215,9 +215,9 @@
 
   - **BE的表面粗糙度随ALD周期数增加而增加，形成较厚的$\text{Ru}$层。**
   - Forming电压的均值与方差均随ALD周期数增加而减小。
-  - $R_\text{HRS}/R_\text{LRS}$随ALD周期数增加而增大（说明电阻窗口更大），且阻态稳定性更强（方差更小）[^1]。
+  - $R_\text{HRS}/R_\text{LRS}$随ALD周期数增加而增大（说明电阻窗口更大），且阻态稳定性更强（方差更小）[1]。
   - 开关周期数随ALD周期数的增加而增加，器件开关电压的绝对值随ALD周期数的增加而变小。
-  - 器件的保持特性随ALD周期数的增加而改善，具体表现为$R_\text{HRS}$与$R_\text{LRS}$的稳定性增强[^2]。
+  - 器件的保持特性随ALD周期数的增加而改善，具体表现为$R_\text{HRS}$与$R_\text{LRS}$的稳定性增强[2]。
 
   - 随ALD周期数增加，CF数量变少，但强度与稳定性增加。
 
@@ -230,13 +230,9 @@
 - **批注：**
 
   - **SCLC**：空间电荷限制电流。
-
-  - [^1]: 为什么ALD周期数由200$\rightarrow$500时，$R_\text{HRS}$的方差反而变大？
-
-  - [^2]: $R_\text{HRS}$会随时间推移而增大，使电阻窗口变大
-
+  - [1]：为什么ALD周期数由200$\rightarrow$500时，$R_\text{HRS}$的方差反而变大？
+  - [2]： $R_\text{HRS}$会随时间推移而增大，使电阻窗口变大
   - **本实验中，对RS特性起主要影响的是BE的粗糙度，而导致BE粗糙度不同的是ALD工艺的周期数。**
-
   - 一次完整的Set-Reset过程中的$I-V$特性及解释：
 
   ![image-20220821105605727](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220821105605727.png)![image-20220821105613397](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220821105613397.png)
