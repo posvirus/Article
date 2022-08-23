@@ -111,3 +111,192 @@
 
 ---
 
+#A 13.7 TFLOPS/W Floating-point DNN Processor using Heterogeneous Computing Architecture with Exponent-Computing-in-Memory  
+><font face="Times New Roman" >Lee J, Kim J, Jo W, et al. A 13.7 TFLOPS/W floating-point DNN processor using heterogeneous computing architecture with exponent-computing-in-memory[C]//2021 Symposium on VLSI Circuits. IEEE, 2021: 1-2.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要提出了一种使用指数计算内存（CIM）和尾数处理引擎的异构 bfloat16 计算架构。能够有效降低存储芯片的能耗并提高计算效率。
+
+- **内容记录：**
+
+  - 浮点数（FP）进行乘累加（MAC）运算时，指数与尾数涉及的运算。可见指数仅涉及加减，而尾数由于需实现相乘，需实现移位、加、减等运算：
+
+  <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220823231032810.png" alt="image-20220823231032810" style="zoom:150%;" />
+
+  - 传统的FP-CIM需要实现对指数与尾数的运算，因此耗费周期数较多，能耗较大，结构较为复杂。
+  - 处理器的整体架构：
+
+  ![image-20220823231130448](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220823231130448.png)
+
+  1. **异构计算架构**，包括**指数内存计算**（ECIM）与**尾数处理引擎**（MPE），能够有效降低能耗。
+  2. 采用**无尾数指数计算**（MFEC），能够最小化指数与尾数间的通信代价，同时降低MAC能耗。
+  3. 位线电荷复用，可降低总体访问能耗。
+
+  - MFEC的具体原理，实现指数与尾数运算的相互隔离：
+
+  ![image-20220823231520241](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220823231520241.png)
+
+  - 运算时序图，使用流水线以提高运算效率，减少运算耗费的周期数：
+
+  ![image-20220823231542814](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220823231542814.png)
+
+- **批注：**
+
+  - **bfloat16（BF16）**：一种深度学习中常用的浮点数格式，共16位其中有1位符号位，8位指数位与7位尾数位。
+  - 低能耗、高精度、高效率一般是CIM技术的3种主要的改进方向，主要可以从CIM架构设计、算法设计、运算时序设计等方向进行优化。
+
+---
+
+#A 1.041-Mb/mm2 27.38-TOPS/W Signed-INT8 Dynamic-LogicBased ADC-less SRAM Compute-In-Memory Macro in 28nm with Reconfigurable Bitwise Operation for AI and Embedded Applications  
+><font face="Times New Roman" >Yan B, Hsu J L, Yu P C, et al. A 1.041-Mb/mm 2 27.38-TOPS/W Signed-INT8 Dynamic-Logic-Based ADC-less SRAM Compute-in-Memory Macro in 28nm with Reconfigurable Bitwise Operation for AI and Embedded Applications[C]//2022 IEEE International Solid-State Circuits Conference (ISSCC). IEEE, 2022, 65: 188-190.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍一种基于**动态逻辑**（Dynamic Logic）的无ADC的SRAM CIM宏，并与传统设计进行了性能对比。
+
+- **内容记录：**
+
+  - 无ADC SRAM CIM宏的总体架构：
+
+    **外围电路**包括：字线驱动器与CIM输入控制（WLDCIC）、输入组合逻辑（ICL）、内存读写电路。
+
+    **内部存储单元**由：6T SRAM单元+4T RPLU构成。
+
+  <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/%E8%9C%82%E8%9C%9C%E6%B5%8F%E8%A7%88%E5%99%A8_fig.png" alt="蜂蜜浏览器_fig" style="zoom: 50%;" />
+
+  - 动态逻辑计算电路（DCC）与本地可重构处理单元（RPLU）的机制：
+
+  <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220823232331678.png" alt="image-20220823232331678" style="zoom:150%;" />
+
+  - RPLU主要的工作机制是：通过输入逻辑电路（ICL）控制RPLU内部FET的开闭，从而实现不同的位运算（AND/XOR/OR）。
+  - DCC的使用取代了ADC，减少了芯片占用面积；RPLU的使用使得运算可重构。
+  - Post-sum电路设计，减少内存访问，提高空间利用效率：
+
+  <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220823232433938.png" alt="image-20220823232433938" style="zoom:150%;" />
+
+- **批注：**
+
+  - 一般含有ADC的CIM架构，由于ADC的加入，外部电路会占据较大的空间，解决方法主要有以下几条：
+
+    1. 使用基于**检测放大器**的处理方案。
+    
+    > <font face="Times New Roman" >Yan B, Li B, Qiao X, et al. Resistive Memory‐Based In‐Memory Computing: From Device and Large‐Scale Integration System Perspectives[J]. Advanced Intelligent Systems, 2019, 1(7): 1900068.</font>
+    
+    2. 使用全数字CIM设计。
+    3. 使用本文中提及的动态逻辑计算电路（DCC）。
+    
+  - **VHP**：向量Hadamard积，即向量按元素相乘，其结果仍为向量。
+
+---
+
+#Unassisted True Analog Neural Network Training Chip  
+
+> <font face="Times New Roman" >Kohda Y, Li Y, Hosokawa K, et al. Unassisted true analog neural network training chip[C]//2020 IEEE International Electron Devices Meeting (IEDM). IEEE, 2020: 36.2. 1-36.2. 4.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍一种单纯借助模拟cross-point阵列实现MAC的神经网络训练芯片。
+
+- **内容记录：**
+
+  - 本文给出的cross-point阵列单元设计：
+
+  <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220823233032859.png" alt="image-20220823233032859" style="zoom:150%;" />
+
+  - 基于文献：
+
+  > <font face="Times New Roman" >Kohda Y, Li Y, Hosokawa K, et al. Unassisted true analog neural network training chip[C]//2020 IEEE International Electron Devices Meeting (IEDM). IEEE, 2020: 36.2. 1-36.2. 4.</font>
+
+  - 给出了这一阵列单元的简化结构：
+
+  <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220823233246676.png" alt="image-20220823233246676" style="zoom:150%;" />
+
+  ​		
+
+  - 删去用于给反相器供电的线路，阵列单元可进一步简化为：
+
+  <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220823233316868.png" alt="image-20220823233316868" style="zoom:150%;" />
+
+  - 其中由YW输入差模信号使电流源输出恒定电流给电容$C$充电，电容$C$的电荷$Q$$/$电压$V_\text{cap}$表征了该单元的权重，且权重大小与输入脉冲的总脉宽呈正比。右侧的FET用于读出，而本文给出的cross-point阵列单元的右侧较为复杂，这主要是为实现训练NN时的前向传播过程与反向传播过程，前向传播时，$Xr$为输入，$Yr$为输出，$T5$、$T6$关闭，$T7$开启；反向传播时，$Yr$为输入，$Xr$为输出，$T5$、$T7$关闭，$T6$开启。
+  - 本文中所使用的N×N cross-point阵列，其实就相当于一个N输入N输出的全连接层。
+  - 用于训练NN的BP算法，这基于文献：
+
+  > <font face="Times New Roman" >Gokmen T, Vlasov Y. Acceleration of deep neural network training with resistive cross-point devices: Design considerations[J]. Frontiers in neuroscience, 2016, 10: 333.</font>
+
+  - 每一训练周期共分为3个过程：**正向传播过程**，**反向传播过程**，**权重更新过程**，这里主要考虑权重更新过程，由于一个N$\times$N cross-point阵列仅对应神经网络中的1个2层结构，于是权重更新可表示为：
+
+  $$
+  w_{ij}\leftarrow w_{ij}+\eta x_i\delta_j
+  $$
+
+  
+
+  - 其中η为全局学习率，**可通过调整电流源的差模输入信号或调整后方的乘数进行改变**。同时，可对该权重更新方法进行简化：
+
+  $$
+  w_{ij}\leftarrow w_{ij}\pm\Delta w_\text{min}\sum\limits_{n=1}^{BL}A_i^n\wedge B_j^n
+  $$
+
+  - 使用随机比特流进行乘法运算，这基于文献：
+
+  > <font face="Times New Roman" >Alaghi A, Hayes J P. Survey of stochastic computing[J]. ACM Transactions on Embedded computing systems (TECS), 2013, 12(2s): 1-19.</font>
+
+  - 该文献中提出的一种仅使用AND门实现的随机乘法器（**近似运算**），2个随机比特流中含1的概率为$p_1$与$p_2$，则在通过AND门后的比特流含1的概率为$p_1p_2$，此即实现乘法：
+
+  ![image-20220823234402565](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220823234402565.png)![image-20220823234409106](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220823234409106.png)
+
+  - 测试用的模拟ASIC设计：
+
+  ![image-20220823234430743](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220823234430743.png)
+
+  - 读上图可知，使用3个模拟cross-point阵列，实现一个单隐层的NN，隐层包含100个神经元。最终使用标准MNIST数据集进行测试。准确率为92.7%。
+
+- **批注：**
+
+  - 一般用于训练NN的BP算法的实现：（这里对各变量采用神经网络中的常用记号）
+
+    - **前向传播：**即使用一个样本对神经网络进行一次输入，计算各神经元的输出：
+
+    $$
+    \left\{\begin{matrix}
+     z^{(l)}=w^{(l)}a^{(l-1)}+b\\
+    a^{(l)}=\sigma(z^{(l)})
+    \end{matrix}\right.
+    $$
+
+    
+
+    - **后向传播：**计算该样本对应的输出层及隐层误差：
+
+    $$
+    \delta^{(L)}=\nabla _{a^{(L)}}C(\theta)\odot\sigma'(z^{(L)})\\
+    \delta^{(l)}=((w^{(l+1)})^T\delta^{(l+1)})\odot\sigma'(z^{(l)})
+    $$
+
+    - **权重更新：**更新权重：
+
+    $$
+    \left\{\begin{matrix}
+    w_{jk}^{(l)}:=w_{jk}^{(l)}-\alpha a_{k}^{(l-1)}\delta_j^{(l)}\\
+    b_j^{(l)}:=b_j^{(l)}-\alpha\delta_j^{(l)}
+    \end{matrix}\right.
+    $$
+
+  - 其中，前向传播与后向传播基本仅涉及VMM运算，易于使用cross-point阵列实现，而权重更新涉及到对单个阵列单元的处理，以及数乘运算。
+
+  - **MNIST数据集**：美国国家标准与技术研究院收集整理的大型手写数字数据库，研究中常使用该数据集对NN进行训练，以NN识别手写数字的准确率作为NN性能的一个可视化指标。
+
+- **文章创新点：**
+
+  - 所有MAC均在模拟cross-point阵列上进行实现，无需数字系统的辅助。（但这种系统在权重更新时必须本身具有良好的对称性与线性，因此阵列单元的复杂度会上升）
+  - 使用随机乘法器简化权重更新时的乘法运算。
+
+---
+
