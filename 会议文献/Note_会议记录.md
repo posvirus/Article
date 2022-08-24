@@ -300,3 +300,138 @@
 
 ---
 
+# High-Density 3D Monolithically Integrated Multiple 1T1R MultiLevel-Cell for Neural Networks  
+
+><font face="Times New Roman" >Esmanhotto E, Brunet L, Castellani N, et al. High-density 3D monolithically integrated multiple 1T1R multi-level-cell for neural networks[C]//2020 IEEE International Electron Devices Meeting (IEDM). IEEE, 2020: 36.5. 1-36.5. 4.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍一种基于1T1R单元的3D RRAM阵列，能够实现阵列的高密度。同时基于该阵列研究了MLC（多位）编程后电导弛豫现象对器件存储位数与精度的影响。
+
+- **内容记录：**
+
+  - 对一些用于NN的RRAM的对比：
+
+    1. 基于文献：
+    
+       > <font face="Times New Roman" >Robayo D A, Sassine G, Lopez J M, et al. Reliability and Variability of 1S1R OxRAM-OTS for High Density Crossbar Integration[C]//2019 IEEE International Electron Devices Meeting (IEDM). IEEE, 2019: 35.3. 1-35.3. 4.</font>
+    
+       文献中给出的1S1R1T单元，其中1S指Ovonic 阈值开关(OTS)，可以有效限制未选择单元存在的隐藏路径电流：
+    
+       ![image-20220824233020858](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220824233020858.png)
+    
+       OTS的几种可能物理机制基于文献：
+    
+       > <font face="Times New Roman" >Zhu M, Ren K, Song Z. Ovonic threshold switching selectors for three-dimensional stackable phase-change memory[J]. MRS Bulletin, 2019, 44(9): 715-720.</font>
+    
+       主要有**thermal runaway模型**（热力学角度）、**field-induced nucleation模型**（晶体结构角度）、**electronic模型**（载流子角度）：
+    
+       ![image-20220824233147483](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220824233147483.png)
+    
+    2. 基于文献：
+    
+       > <font face="Times New Roman" >Hsieh E R, Giordano M, Hodson B, et al. High-density multiple bits-per-cell 1T4R RRAM array with gradual SET/RESET and its effectiveness for deep learning[C]//2019 IEEE International Electron Devices Meeting (IEDM). IEEE, 2019: 35.6. 1-35.6. 4.</font>
+    
+       文献给出的1T4R单元设计，增加RRAM单元密度，但同时需要重新制定编程方案，同时相邻单元间由于共用1T会有干扰：
+    
+       ![image-20220824233348347](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220824233348347.png)
+    
+    3. 本文中提出的1T1R单元3D RRAM架构：
+    
+       ![image-20220824233407022](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220824233407022.png)
+    
+       相对平面RRAM位密度增加1.5倍。
+    
+  - 本文给出的2种电导映射方案：
+  
+    ![image-20220824233436411](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220824233436411.png)
+  
+    1. 基于均值与方差的映射（**SBA**），每一电导水平由以下区间给出：
+       $$
+       \mu_i-\Delta\sigma_i<G<\mu_i+\Delta\sigma_i
+       $$
+       其中$\mu_i$为均值，$\Delta\sigma_i$为方差。
+  
+    2. 线性映射（LA）。
+  
+    在MLC编程时利用上图所示的迭代编程方案实现电导水平的调整。
+  
+  - 对MLC编程后电导弛豫现象的研究：
+  
+  ![image-20220824233950102](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220824233950102.png)
+  
+  - 对2种电导映射方案（SBA/LA）的电导弛豫现象（t=60s后）的研究，较低水平的电导会发生较大偏移，无法使用：
+  
+  ![image-20220824234017394](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220824234017394.png)
+  
+  - 验证电导弛豫现象并非由于设计问题导致，验证方法是对比不同设备的电导弛豫，显示该现象从设备到设备的均匀性。
+  - 分别在MNIST数据集与ECG数据集上训练全连接NN，显示电导弛豫现象对NN应用的准确性影响不大。
+  
+- **批注：**
+
+  - 有关电导水平与表示位数的关系：一般RRAM单元若能够表示$N$个电导水平，则代表其能够表示的位数为$\log_2N$，比如本文中的9位电导水平，其能实现3.17位的存储。
+  - RRAM存储密度的提升主要基于2个方面：其一是对硬件架构的设计，使单位空间能容纳更多存储单元，其二是对单元多位存储能力的提升，使RRAM单元能够具有尽可能多的电导水平。
+  - **BER（Bit Error Rate）**：用于衡量RRAM编程的准确性，数学上等于RRAM阵列编程错误的单元数与RRAM阵列的总单元数的比值，本文中认为BER<$10^{-3}$时符合要求。
+  - 为什么电导弛豫现象对NN训练的准确率影响不大？因为**NN只对最终的分类精度有要求**，而对矩阵的精度没有过于严格的要求，因此可以对矩阵元素的权重进行一定程度的容错。而既然NN训练对电导弛豫现象有弹性，那么尽可能地增加RRAM单元的电导水平数便有利于增加NN最终的分类精度。
+
+- **文章创新点：**
+
+  - 设计了一种新型 3D（双层）RRAM架构，将 RRAM 的位密度相对于平面 RRAM 提高 1.5 倍。
+  - 将 MLC 编程与 3D RRAM 设计综合应用，进一步提升 RRAM 的存储密度。
+  - 将 RRAM 应用于对电导弛豫弹性较大的 NN 训练上。
+
+---
+
+#Fully Integrated Spiking Neural Network with Analog Neurons and RRAM Synapses  
+
+><font face="Times New Roman" >Valentian A, Rummens F, Vianello E, et al. Fully integrated spiking neural network with analog neurons and RRAM synapses[C]//2019 IEEE International Electron Devices Meeting (IEDM). IEEE, 2019: 14.3. 1-14.3. 4.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要使用RRAM实现**脉冲神经网络（SNN）**的一次完整集成。实验实现的NN结构为感知机，并使用MNIST数据集进行训练，训练后实现了84%的分类准确率。
+
+- **内容记录：**
+
+  - 基于N2D2（Neural Network Design and Deployment）学习框架实现SNN：
+
+    ![image-20220824234724627](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220824234724627.png)
+
+    首先，使用**BP算法**训练DNN，其次，将DNN中的相关变量（权重，输入，输出，阈值等）转换（等价映射）至SNN中。
+
+  - 基于文献：
+
+    > <font face="Times New Roman" >Pérez-Carrasco J A, Zhao B, Serrano C, et al. Mapping from frame-driven to frame-free event-driven vision systems by low-rate rate coding and coincidence processing--application to feedforward ConvNets[J]. IEEE transactions on pattern analysis and machine intelligence, 2013, 35(11): 2706-2719.</font>
+
+    文献给出了将一般NN中的变量映射至SNN中的方法：
+
+    ![image-20220824235040435](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220824235040435.png)![image-20220824235046328](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220824235046328.png)
+
+  - SNN的突触的物理结构：
+
+  <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/%E8%9C%82%E8%9C%9C%E6%B5%8F%E8%A7%88%E5%99%A8_fig1.png" alt="蜂蜜浏览器_fig1" style="zoom:50%;" />
+
+  - 本文中使用单极RRAM（SLC）单元实现突触，为实现多个权重水平，使用8个单极RRAM单元共同实现1个突触：
+
+  ![image-20220824235321403](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220824235321403.png)
+
+- **批注：**
+
+  - 一般NN的神经元模型被称为**帧驱动模型**（frame-driven），而SNN使用的是如下所示的**事件驱动模型**（event-driven）:
+
+  ![蜂蜜浏览器_fig2](C:/Users/86181/Desktop/%E4%B8%AA%E4%BA%BA%E8%B5%84%E6%96%99/TIME/Meetings/Art3/%E8%9C%82%E8%9C%9C%E6%B5%8F%E8%A7%88%E5%99%A8_fig2.png)
+
+  - 该模型主要可实现如下功能：
+
+  ![蜂蜜浏览器_fig3](https://raw.githubusercontent.com/posvirus/Image_storage/main/%E8%9C%82%E8%9C%9C%E6%B5%8F%E8%A7%88%E5%99%A8_fig3.png)
+
+- **文章创新点：**
+
+  - 首次在RRAM上完整集成了脉冲神经网络。降低了编程所需的功耗。
+  - 使用多个单极RRAM实现MLC编程以模拟突触，增加了RRAM的单元密度。
+
+---
+
