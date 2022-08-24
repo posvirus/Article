@@ -412,7 +412,7 @@
 
   - SNN的突触的物理结构：
 
-  <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/%E8%9C%82%E8%9C%9C%E6%B5%8F%E8%A7%88%E5%99%A8_fig1.png" alt="蜂蜜浏览器_fig1" style="zoom:50%;" />
+  <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/%E8%9C%82%E8%9C%9C%E6%B5%8F%E8%A7%88%E5%99%A8_fig1.png" alt="蜂蜜浏览器_fig1" style="zoom: 33%;" />
 
   - 本文中使用单极RRAM（SLC）单元实现突触，为实现多个权重水平，使用8个单极RRAM单元共同实现1个突触：
 
@@ -422,7 +422,7 @@
 
   - 一般NN的神经元模型被称为**帧驱动模型**（frame-driven），而SNN使用的是如下所示的**事件驱动模型**（event-driven）:
 
-  ![蜂蜜浏览器_fig2](C:/Users/86181/Desktop/%E4%B8%AA%E4%BA%BA%E8%B5%84%E6%96%99/TIME/Meetings/Art3/%E8%9C%82%E8%9C%9C%E6%B5%8F%E8%A7%88%E5%99%A8_fig2.png)
+  <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/figx.png" alt="figx" style="zoom:50%;" />
 
   - 该模型主要可实现如下功能：
 
