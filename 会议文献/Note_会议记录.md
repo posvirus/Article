@@ -780,3 +780,88 @@
 
 ---
 
+# Monolithic 3D Integration of High Endurance Multi-Bit Ferroelectric FET for Accelerating Compute-In-Memory  
+><font face="Times New Roman" >Dutta S, Ye H, Chakraborty W, et al. Monolithic 3D integration of high endurance multi-bit ferroelectric FET for accelerating compute-in-memory[C]//2020 IEEE International Electron Devices Meeting (IEDM). IEEE, 2020: 36.4. 1-36.4. 4.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍一种基于FeFET的3D-CIM架构设计，对其制造工艺进行了详细描述，同时对其制造工艺的条件对最终器件性能的影响做了讨论，最后讨论了该CIM架构在实际运算时的性能。
+
+- **内容记录：**
+
+  - 传统CIM架构与**Monolithic 3D（M3D）** CIM架构的对比：
+
+    ![](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825104222143.png)
+
+    传统的CIM架构将NVM器件单元与外围电路共同安排于FEOL中，而M3D CIM架构将NVM器件单元安排于BEOL中（3D），同时在能耗、面积方面相对传统CIM架构具有显著的优势。
+
+  - 本文设计的1T1FeFET单元：
+
+    ![image-20220825104353235](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825104353235.png)
+
+    其中FeFET作为NVM单元实现存储功能，位于上层，通过BEOL工序实现，晶体管（1T）作为调控单元位于下层，通过FEOL工序实现。
+
+  - 1FeFET1T器件的制造工序：
+
+  ![image-20220825104426455](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825104426455.png)
+
+  - 使用ALD沉积HfO2后，对退火条件进行改变，考虑不同退火条件下器件性能的变化：
+
+  ![image-20220825104443716](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825104443716.png)
+
+- **批注：**
+
+  - 对FeFET来说，由于其采用铁电材料，其不像RRAM，开关特性由I-V曲线进行描述，而一般会由该铁电材料的**极化回线**（P-E loop）给出：
+
+  ![image-20220825104503592](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825104503592.png)
+
+- **文章创新点：**
+
+  - 设计并实现了Monolithic 3D（M3D） CIM架构，具有高密度，低能耗的特点。
+  - 对器件制作工艺中的条件进行讨论，探究了制作条件对器件性能的影响。
+
+---
+
+# Monolithic 3D Integration of Logic, Memory and Computing-In-Memory for One-Shot Learning  
+><font face="Times New Roman" >  Li Y, Tang J, Gao B, et al.  Monolithic 3D Integration of Logic, Memory and Computing-In-Memory for  One-Shot Learning[C]//2021 IEEE International Electron Devices Meeting  (IEDM). IEEE, 2021: 21.5. 1-21.5. 4.  </font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍一种可用于**一次学习（One-Shot Learning）**的M3D CIM架构，分别介绍了该架构的制造工艺以及最终的设备特性，最后，使用该架构实现了一次学习，实现了高准确率、高速与低能耗。
+
+- **内容记录：**
+
+  - 本文设计的M3D CIM架构的基本结构与制作工艺：
+
+    ![image-20220825104811471](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825104811471.png)
+
+    第一层为实现控制逻辑的CMOS电路，在FEOL中进行制造；第二层为基于$\text{HfAlO}_\text{x}$的1T1R阵列，在BEOL中进行制造；第三层为基于$\text{Ta}_2\text{O}_5$的2T2R阵列，在BEOL中进行制造。
+
+  - 该M3D CIM架构中，第一层为基于$\text{Si}$的MOSFET，主要用于实现一些控制逻辑，同时作为数据输入的端口，第二层为RRAM，实现了具有2个卷积层与2个全连接层的CNN，第三层为**TCAM（Ternary Content Addressable Memory）**层，存储CNN中提取的特征并实现查找功能。
+
+  - 探究制造第三层时是否会对第二层的器件特性产生影响：
+
+  ![image-20220825105000953](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825105000953.png)
+
+  ​		读图可知，在第三层制造前后，第二层的开关特性并未显著改变，表明了两层制造工艺的独立		性。
+
+  - M3D CIM实现一次学习的示意图：
+
+  <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825105036584.png" alt="image-20220825105036584" style="zoom:150%;" />
+
+- **批注：**
+
+  - 第三层所选取的2T为**碳纳米管FET（CNTFET）**，它以碳纳米管（CNT）作为导电沟道。
+  - **对于制造第二层RRAM是否会对第一层CMOS电路有影响**：由于两者分属BEOL与FEOL，而本文中BEOL采用低温工艺，不会对FEOL中生成的层产生影响。
+
+- **文章创新点：**
+
+  - 设计并实现了一种可用于一次学习的M3D CIM架构，相对于传统GPU能够实现高准确率、高速与低能耗。
+  - 在制造工艺上，三层的制造互不影响，相互独立，器件特性得以保存。
+
+---
+
