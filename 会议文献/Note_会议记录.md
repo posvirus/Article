@@ -865,3 +865,292 @@
 
 ---
 
+# SOT-MRAM based Analog in-Memory Computing for DNN inference  
+
+><font face="Times New Roman" >Doevenspeck J, Garello K, Verhoef B, et al. SOT-MRAM based analog in-memory computing for DNN inference[C]//2020 IEEE Symposium on VLSI Technology. IEEE, 2020: 1-2.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍一种可用于实现量化DNN权重存储的SOT-MRAM器件，并通过实验证明其用于实现**模拟内存计算（AiMC）**的合理性。
+
+- **内容记录：**
+
+  - DNN中层间发生的MVM运算在cross-point阵列上的映射：
+
+  ![image-20220825150611130](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825150611130.png)
+
+  - SOT-MRAM单元的读写原理：
+
+    ![image-20220825150638526](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825150638526.png)
+
+    相比STT-RRAM，SOT-MRAM器件的特点是通过在相邻的SOT层中注入面内电流来完成自由磁层的切换，这与STT-MRAM不同，STT-MRAM的电流垂直注入磁隧道结中，读写操作通过同一路径执行：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825150657510.png" alt="image-20220825150657510" style="zoom:150%;" />
+
+  - 实验设计的用于实现三元量化权重（1，0，-1）的**差分电导对**及其量化过程：
+
+    ![image-20220825150726951](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825150726951.png)![image-20220825150734997](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825150734997.png)
+
+    量化时主要是将原权重的分布（PDF）量化为以0，1，-1为中心的分布的叠加，并分别为其分配方差$\sigma_{\text{w,train}}$，其中方差与SOT MRAM电导存在以下转换关系：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825150819771.png" alt="image-20220825150819771" style="zoom:150%;" />
+
+  - 在测试时改变量化使用的方差$\sigma$，发现使用更小的方差能得到更高的训练精度：
+
+  ![image-20220825150913036](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825150913036.png)
+
+- **批注：**
+
+  - DNN的量化：在神经网络实现分类任务时，并不需要我们对权重等参数作完全精确的描述，因此，我们常常会对参数进行量化以期使用更少的比特数对参数进行描述，减少冗余的数据存储。
+  - MRAM的**CD（Critical Dimension）**：指MRAM器件存在的一个最小尺寸，当器件小于该尺寸时，器件的读写特性便会因小尺寸而退化。
+  - 变异系数（$\sigma/\mu$）：相当于对方差的标准化，使得处于不同量级的数据的离散程度具有可比性，文中使用变异系数判断RA处于不同量级是否会对器件与器件间的均匀性产生影响。
+
+- **文章创新点：**
+
+  - 提出一种可用于实现量化DNN权重存储的SOT-MRAM器件，并从多方面分析其合理性。
+  - 在训练与测试中使用了不同的$\sigma$参数，提升了DNN的分类精度。
+
+---
+
+# Multi-pillar SOT-MRAM for Accurate Analog in-Memory DNN Inference  
+
+><font face="Times New Roman" >Doevenspeck J, Garello K, Rao S, et al. Multi-pillar SOT-MRAM for accurate analog in-memory DNN inference[C]//2021 Symposium on VLSI Technology. IEEE, 2021: 1-2.</font>
+
+本文的前置工作：
+
+> <font face="Times New Roman" >Doevenspeck J, Garello K, Verhoef B, et al. SOT-MRAM based analog in-memory computing for DNN inference[C]//2020 IEEE Symposium on VLSI Technology. IEEE, 2020: 1-2.</font>
+
+---
+
+- **写作目的：**
+
+  - 本文主要基于已研究过的，可用于实现**三元权重**量化的SOT-MRAM器件，进一步提出可用于实现**九元权重**量化的SOT-MRAM器件单元，并利用实验展示其良好的量化效果，最后通过DNN训练进行测试。
+
+- **内容记录：**
+
+  - MRAM因其良好的非易失性和可扩展性，是实现DNN权重存储的一个可能方案，但是单个MRAM器件只能实现2个电导水平，表示1bit信息。
+
+  - 使用2个MRAM组合可构成**差分电导对（differential conductance pair）**，实现三元权重（0，-1，1）的表示，但三元权重无法准确表示浮点数，从而导致DNN最终的分类精度下降：
+
+    ![image-20220825151601986](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825151601986.png)
+
+    如图所示，权重表示至少需要9个离散水平才能保证DNN的分类精度。
+
+  - 能够实现5个电导水平的SOT-MRAM器件：
+
+    ![image-20220825151633083](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825151633083.png)
+
+    在写操作时，由于施加于每个MJT结构上的电压VVCMA是随该MJT在SOT-track上的位置而线性变化的，因此这4个MJT共会出现：4P，3P/1AP，2P/2AP，1P/3AP，4AP共5种阻态。而由该器件再进一步构成差分电导对，便可得到具有5+5-1=9种阻态的MRAM器件单元。
+
+  - 由于器件本身的非理想性，器件位于什么电导水平本质上为概率事件：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825151745327.png" alt="image-20220825151745327" style="zoom:150%;" />
+
+    该图反映了在不同写入电流时，各电导水平出现的概率，各电导水平的概率密度峰值不重叠，具有较为良好的区分度。
+
+- **批注：**
+
+  - MRAM通过电压改变磁性材料的极化方向，又被称为**VCMA效应（Voltage Control of Magnetic**
+
+    **Anisotropy effect）**。
+
+  - SOT-MRAM的优势：**高耐久性**，**高速**以及**低功耗**，并具有**良好的扩展性**，同时，相对STT-MRAM，由于其是三端器件，可实现**读写操作间的去耦**。
+
+  - 影响DNN在RRAM阵列中训练精度的三个因素：**电导水平数量**、**BER**（比特错误率）、**各电导水平识别的裕度**。
+
+- **文章创新点：**
+
+  - 基于先前的工作，提出了可用于实现九元权重的SOT-MRAM器件，同时无需额外的外围电路或阵列。有效解决了DNN中浮点数量化的精度问题。
+  - 通过测量MRAM器件各电导水平的概率分布，全面而有效地衡量了器件各电导水平的选择性。
+
+---
+
+# Towards 10000TOPS/W DNN Inference with Analog in-Memory Computing – A Circuit Blueprint, Device Options and Requirements  
+
+><font face="Times New Roman" >Cosemans S, Verhoef B, Doevenspeck J, et al. Towards 10000TOPS/W DNN inference with analog in-memory computing–a circuit blueprint, device options and requirements[C]//2019 IEEE International Electron Devices Meeting (IEDM). IEEE, 2019: 22.2. 1-22.2. 4.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要提出了一种可用于DNN的矩阵向量乘法器的设计蓝图，其基于AiMC技术且能效可达**10000TOPS/W**，同时还对可能实现该架构的3种器件进行了讨论。
+
+- **内容记录：**
+
+  - AiMC技术所需满足的几个基本点：
+
+    1. 能够适应低精度的运算/权重量化。
+    2. 能够适应权重存储的退化以及运算中的错误。
+    3. 能在DNN推理中获得较高的精度，或者相对传统器件的能耗、面积与成本有明显的提升。
+
+  - NN训练时对错误的耐受能力：
+
+    ![image-20220825152323311](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825152323311.png)
+
+    在本文中，我们希望实现的架构能够实现$\sigma/\text{range}<10\%$。
+
+  - AiMC架构的一种常见的实现方式：
+
+    ![image-20220825152439717](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825152439717.png)
+
+    该实现方案存在一些问题：
+
+    1. 输入DAC的必须是电流，利用电流幅值进行模拟量转化。
+    2. **activation line**与**summation line**上因线电阻引起的电压降将会影响MVM运算的精度。
+    3. 由于需要实现高速运算，输出端的集成运放需要很大的增益带宽来适应高频信号。
+
+  - 本文采用的AiMC架构设计：
+
+    ![image-20220825152559248](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825152559248.png)
+
+    与先前设计对比，主要有以下优势：
+
+    1. 直接使用电压进行输入，输入量与电压脉冲成正比，便于调制。
+    2. 使用**类电流源器件（current source-like elements, CSE）**作为输出，相对阻性器件（RE）错误率更小。
+
+  - 讨论如何减轻activation line与summation line上因线电阻引起的电压降（**IR drop**），分别通过I，R两个侧面进行讨论：
+
+    ![image-20220825152716595](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825152716595.png)
+
+    可知，我们需要器件电阻适当大，编程电流适当小以减少activation line与summation line上的电压降，同时也可将运算速度控制在适当的范围内。
+
+  - 针对理想器件的能效进行简单估算：
+
+  ![image-20220825152752788](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825152752788.png)
+
+  - 对可用于实现本文提出的AiMC架构的器件的讨论：
+
+    - **IGZO-based 2T1C DRAM**：
+
+      ![image-20220825152908369](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825152908369.png)
+
+      基于电荷的权重存储设计，使用2个晶体管分别实现读写操作。同时为解决漏电流以及读出电流太高的问题，采用**IGZO晶体管**。
+    
+    - **SOT-MRAM**：
+    
+      ![image-20220825153015900](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825153015900.png)
+    
+      具有高阻态，但一方面只有2个电导水平，另一方面开关比较低。
+    
+    - **PCM**：
+    
+      ![image-20220825153046380](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825153046380.png)
+    
+      需要选择器，可能并不适合。
+  
+- **批注：**
+
+  - **TOPS**：Tera Operations Per Second的缩写，1TOPS代表处理器每秒钟可进行$10^{12}$次操作。TOPS/W即可用于衡量硬件进行某种操作的能效。
+  - 实现高性能AiMC设计的关键点：
+    1. 高阻值（$>1\text{M}\Omega$）以及小电流的器件单元。
+    2. 权重存储的变化范围小。
+    3. 与外部电路的工作电压兼容。
+    4. 器件单元具有较高的面密度。
+
+- **文章创新点：**
+
+  - 全面而完整地对现阶段常用的两种AiMC架构设计进行了介绍，并指出其存在的优缺点。
+  - 使用合理的假设对文中介绍的AiMC架构的能效进行了估算，给出了证明其高能效的有效论据。
+  - 对适用于本文AiMC架构的器件设计做了分析与讨论，指出其优缺点与可行性。
+
+---
+
+# Confined PCM-based Analog Synaptic Devices offering Low Resistance-drift and 1000 Programmable States for Deep Learning  
+
+><font face="Times New Roman" >Kim W, Bruce R L, Masuda T, et al. Confined PCM-based analog synaptic devices offering low resistance-drift and 1000 programmable states for deep learning[C]//2019 Symposium on VLSI Technology. IEEE, 2019: T66-T67.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要讨论了一种外加薄金属衬套的PCM器件（**PCM with a thin metallic liner**），具有传统PCM无法实现的高度线性、低电阻漂移、高耐久性的特性。并通过MNIST数据集对其进行测试，体现其在DNN推理应用中的可靠性。
+
+- **内容记录：**
+
+  - 基于文献：
+
+    > <font face="Times New Roman" >Kim W, BrightSky M, Masuda T, et al. ALD-based confined PCM with a metallic liner toward unlimited endurance[C]//2016 IEEE International Electron Devices Meeting (IEDM). IEEE, 2016: 4.2. 1-4.2. 4.</font>
+
+    给出了具有薄金属衬套的PCM器件具有高度线性与高耐久性的原因：
+
+    ![image-20220825153818084](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825153818084.png)
+
+    高度线性主要是因为薄金属衬套相当于一个线性电阻与PCM器件并联，电阻的$I-V$线性关系会对器件整体的编程线性度进行调制；高耐久性则是因为金属衬套会防止编程材料形成空隙。
+
+  - 文中分别选用了3种金属衬套A/B/C，并分别对具有这3种衬套的PCM进行读写测试：
+
+    ![image-20220825153917497](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825153917497.png)![image-20220825153922970](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825153922970.png)
+
+    1. PCM A/B/C均在编程时表现出高度的线性、低噪声以及较小的电阻漂移。
+    2. PCM B可实现更高的耐久性，而PCM C可实现更低的电导漂移。
+    3. 在**高阻态**与**最低阻态**下，PCM A均表现出较低的电阻漂移与较低的噪声。
+
+  - 可用于实现DNN推理的差分电导对：
+
+  ![image-20220825154035860](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825154035860.png)
+
+- **批注：**
+
+  - **对外加金属衬套的PCM具有高耐久性的进一步解释**：
+
+    本文中提到的PCM是使用**原子层沉积技术（ALD）**沉积**GST材料（$\text{Ge}_2\text{Sb}_2\text{Te}_5$）**制作的，在初始的几次编程时，$\text{Sb}$与$\text{Te}$会向器件两端发生偏析：
+
+    ![image-20220825154229689](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825154229689.png)
+
+    这使得PCM的切换区域逐渐移向中央，而外加的金属衬套会保证材料的致密性，从而防止了$\text{Sb}$与$\text{Te}$的进一步偏析，保证了后续编程的稳定性。
+
+---
+
+# 8-bit Precision In-Memory Multiplication with Projected Phase-Change Memory 
+
+> <font face="Times New Roman" >  Giannopoulos I, Sebastian A, Le  Gallo M, et al. 8-bit precision in-memory multiplication with projected  phase-change memory[C]//2018 IEEE International Electron Devices Meeting  (IEDM). IEEE, 2018: 27.7. 1-27.7. 4.  </font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍一种能够实现高精度乘法运算的**Proj-PCM**器件，同时在读写时具备较小的电导漂移与较低的噪声，文中同时提出了针对温度引发电导漂移的补偿方案，并最终实验演示了一个基于神经网络的图像分类任务。
+
+- **内容记录：**
+
+  - 外加投影层的Proj-PCM器件，及其电导的动态范围：
+
+  ![image-20220825155008068](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825155008068.png)
+
+  ![image-20220825155014669](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825155014669.png)
+
+  - Proj-PCM相对传统PCM具有：
+
+    1. 在读取时电导值具有较低的场依赖性，即电导基本不会随施加的读取电压变化。
+    2. 更高的耐久性，电导水平能在更长时间内维持不变。
+    3. 更低的编程噪声。
+    4. 温度引发的电导漂移更少，电导漂移与温度间具有更好的量化关系，便于在后续工作中对温度影响进行补偿。
+
+    ![image-20220825155138710](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825155138710.png)![image-20220825155143668](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825155143668.png)![image-20220825155201024](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825155201024.png)![image-20220825155213009](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825155213009.png)
+
+  - 使用单个Proj-PCM器件实现标量乘法，能够达到8位精度。
+
+  - Proj-PCM电导水平随温度的漂移可使用简单的公式表达：
+
+    ![image-20220825155258506](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825155258506.png)
+
+    在本文中仅考虑投影层的温度效应，而$G_p(T)$中的系数$\alpha_p$是一个独立于电导状态与温度的常量，因此可较好地设计补偿方案如下：
+
+    ![image-20220825155332594](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825155332594.png)
+
+- **批注：**
+
+  - 本文实质上利用Proj-PCM提出了CIM技术运算低精度的一种解决方案。本文提出的方案是基于**器件级别（device-level）**的，相对应地，还可以在**架构级别**与**系统级别**提出相应的运算精度优化方案。
+  - 探究PCM电导水平的场依赖性是有必要的，因为PCM是二端器件，其读写是通过同一路径的，因此读取操作时的低场是否会影响电导水平是必须要考虑的因素。
+
+- **文章创新点：**
+
+  - 提出一种能够实现高精度乘法运算的Proj-PCM器件，同时在读写时具备较小的电导漂移与较低的噪声。
+  - 针对传统PCM与Proj-PCM进行性能对比，体现Proj-PCM的优势。
+  - 针对温度引起的PCM电导漂移设计了补偿方案。
+  - 分别对单个器件实现的标量乘法与多个器件组成的阵列实现的分类任务的精度进行了测试，较为全面。
+
+---
+
