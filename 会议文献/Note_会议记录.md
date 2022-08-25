@@ -435,3 +435,348 @@
 
 ---
 
+# ECRAM as Scalable Synaptic Cell for High-Speed, Low-Power Neuromorphic Computing
+
+><font face="Times New Roman" >Tang J, Bishop D, Kim S, et al. ECRAM as scalable synaptic cell for high-speed, low-power neuromorphic computing[C]//2018 IEEE International Electron Devices Meeting (IEDM). IEEE, 2018: 13.1. 1-13.1. 4.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍一种基于$\text{Li}^+$嵌入$\text{WO}_3$的ECRAM（电化学存储器），能够实现高速、低功耗的神经形态计算。
+
+- **内容记录：**
+
+  - ECRAM单元的三端器件结构：
+
+    ![image-20220825093358194](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825093358194.png)
+
+    当读取时，连接源极与漏极，读取该器件的静态电导值作为结点的权重；当编程时，连接漏极与栅极，在栅极电流输入的控制下使Li+嵌入WO3中，改变器件电导。器件的完整结构：
+
+    ![image-20220825093507972](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825093507972.png)
+
+    同样需要外接电流源对栅极电流进行控制，电流源由FET组成。
+
+  - 分别研究器件单元权重状态数、权重更新时的对称性、器件随机性在使用MNIST数据集训练时对分类精度的影响：
+
+  ![image-20220825093547819](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825093547819.png)![image-20220825093552208](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825093552208.png)![image-20220825093558877](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825093558877.png)
+
+  - ECRAM在权重更新对称性上与其余器件的对比，可见**多端器件**的优势所在：
+
+  ![image-20220825093623585](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825093623585.png)
+
+- **批注：**
+
+  - 三端器件与二端器件作为RAM单元的对比：
+    1. **二端器件**：常见的有RRAM、FeRAM、PCM等，二端器件的优势在于结构简单，易于集成，存储密度也相应较大。但相对应的在物理上的随机性与不均匀性也较为明显，通常需要更为复杂的算法或外部电路进行调制。（因其本身其实可以说是基于缺陷设计的器件）
+    2. **三端/多端器件**：常见的是FET构成的单元，三端/多端器件的优势在于可以使读入与编程两个操作**去耦**，同时也使整个阵列具有更好的耐用性与更低的能耗，FET所具有的栅极可实现对电流，进而实现对单元权重的精确调控。
+
+- **文章创新点：**
+
+  - 使用基于$\text{Li}^+$嵌入$\text{WO}_3$的ECRAM进行神经形态运算，实现了高精度，高速及低功耗的目标。
+  - 文中所提出的ECRAM在权重更新方面具有卓越的线性与对称性。
+
+---
+
+#Metal-oxide based, CMOS-compatible ECRAM for Deep Learning Accelerator  
+><font face="Times New Roman" >  Kim  S, Todorov T, Onen M, et al. Metal-oxide based, CMOS-compatible ECRAM for deep  learning accelerator[C]//2019 IEEE International Electron Devices Meeting  (IEDM). IEEE, 2019: 35.7. 1-35.7. 4.  </font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍一种基于金属氧化物结构的电化学存储器（MO-ECRAM），在展示其高速、低功耗、对称开关特性等优异性能的同时，首次通过实验演示了并行阵列操作、随机更新方案和零偏移技术。
+
+- **内容记录：**
+
+  - MO-ECRAM对称的开关特性：
+
+  ![image-20220825094045643](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825094045643.png)
+
+  - 分别以不同脉宽的脉冲测定其开关特性：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/%E8%9C%82%E8%9C%9C%E6%B5%8F%E8%A7%88%E5%99%A8_1.png" alt="蜂蜜浏览器_1" style="zoom: 50%;" />
+
+    分别在10$\mu s$/1$\mu s$/100$ns$/10$ns$的条件下测定其开关特性，脉宽越窄，最终运算速度越快，但相对应的对称性与开关比均会降低（因为单位脉冲变化的$\Delta G$会变小），但MO-ECRAM在10$\mu s$-10$ns$的范围内均显示出可观的开关特性。
+
+  - 单位脉冲对应的电导更新值随脉宽、电压脉冲幅度、电流脉冲幅度的变化：
+
+  ![image-20220825094406166](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825094406166.png)
+
+  - 使用阵列演示顺序编程与并行编程，展示各单元间具有良好的独立性：
+
+  ![image-20220825094426529](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825094426529.png)
+
+  - 使用随机更新方案和零偏移技术进行阵列演示，零偏移技术可参考文献：
+
+    > <font face="Times New Roman" >Kim et al., arXiv:1907.10228, (2019).  </font>
+
+- **批注：**
+
+  - 以下是基于$\text{Li}^+$的ECRAM的开关特性：
+
+    ![image-20220825094600546](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825094600546.png)
+
+    与MO-ECRAM对比，基于$\text{Li}^+$的ECRAM在编程与读取的交界处电导有明显的跃迁现象，可能与$\text{Li}^+$本身是否运动有关，值得研究。
+
+  - 各单元间的读写之所以具有良好的独立性，是因为该阵列可选用电压脉冲进行读写，而电压脉冲与$\Delta G$呈指数关系，因此单元间较小的潜行电流对$\Delta G$的干扰相较编程电流本身会非常小。
+
+- **文章创新点：**
+
+  - 提出了MO-ECRAM这一具有良好性能的存算一体阵列单元。
+  - 分别测定了电压脉冲与电流脉冲对$\Delta G$的调控，利用电压脉冲幅度与$\Delta G$的指数关系减小单元间编程的干扰。
+  - 使用随机更新方案和零偏移技术进行阵列演示。
+
+---
+
+# Capacitor-based Cross-point Array for Analog Neural Network with Record Symmetry and Linearity  
+
+><font face="Times New Roman" >  Li Y, Kim S, Sun X, et al. Capacitor-based cross-point array for analog neural network with record symmetry and linearity[C]//2018 IEEE Symposium on VLSI Technology. IEEE, 2018: 25-26. </font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍一种基于电容器的cross-point阵列，可以实现目前最优的线性度与对称性，同时还讨论了在该阵列上应用**低泄漏DRAM**（low-leakage DRAM）技术的可能性。
+
+- **内容记录：**
+
+  - 基于电容器的阵列单元设计：
+
+    ![image-20220825095228252](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825095228252.png)
+
+    电流源左方的反相器为1个数字反相器+2个模拟反相器，数字反相器，模拟反相器的作用主要是利用XW_P与XW_N对输入差模信号VGP与VGN进行调制，进而调制电流源的电流输入。
+
+  - cross-point阵列的构造：
+
+  ![image-20220825095304316](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825095304316.png)
+
+  - 对阵列单元编程并行性的测试（也可以说是对各单元间独立性的测试）：
+
+    ![image-20220825095330362](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825095330362.png)
+
+    读图可知，2$\times$2阵列中，各单元的权重更新值$\Delta V$在并行编程时保持独立与线性。
+
+  - 对电容保持时间的测试：
+
+    ![image-20220825095413594](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825095413594.png)
+
+    保持时间的量级为1s，因此如果权重更新所经历的时间量级小于保持时间，那么在权重更新过程中便无需进行单元刷新。
+
+- **批注：**
+
+  - 基于电容器设计的阵列单元的优点：相较于基于NVM设计的阵列单元，电容器单元在权重更新时具有更高的精度，同时使用电容器单元的阵列在NN训练中也不需要进行定时刷新，因为单元权重在训练期间本身会不断更新。这解决了电容器单元阵列存储信息具有易失性的缺陷。
+
+- **文章创新点：**
+
+  - 设计了一种基于电容器的cross-point阵列，在开关特性上可以实现目前最优的线性度与对称性。
+  - 利用该阵列高速读写的特性，使电容器在NN训练中无需进行刷新，巧妙避开了利用电容器存储权重信息易失的缺陷。
+
+---
+
+#Experimental Demonstration of Non-volatile Capacitive Crossbar Array for In-memory Computing 
+
+><font face="Times New Roman" >  Luo Y C, Hur J, Wang T H, et al. Experimental demonstration of non-volatile capacitive crossbar array for in-memory computing[C]//2021 IEEE International Electron Devices Meeting (IEDM). IEEE, 2021: 1-4.</font>
+
+---
+
+- **写作目的：**
+
+  本文通过实验演示了基于铁电材料$\text{Hf}_{0.5}\text{Zr}_{0.5}\text{O}_2$的电容式cross-point阵列在内存运算方面的应用。
+
+- **内容记录：**
+
+  - $\text{TiN/HZO/TiN}$电容器cross-point阵列的制作过程：
+
+    ![image-20220825095900810](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825095900810.png)
+
+    使用**等离子体增强原子层沉积技术（plasma-enhanced atomic layer deposition, PEALD）**进行器件制作。
+
+  - 电容式cross-point阵列与传统1T1R阵列的对比：
+
+    ![image-20220825095947176](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825095947176.png)
+
+    1. 1T1R式同时具备静态与动态功耗（因其阵列是导通的，会存在静态电流），电容式仅具有动态功耗。
+    2. 1T1R式的开关比较小，而电容式的则较大。
+    3. 1T1R式较难进行3D堆叠，而电容式进行3D堆叠的可能性较大。
+
+  - 1/3 $V_\text{w}$写入方案下可能引发的误差：
+
+    ![image-20220825100059698](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825100059698.png)
+
+    造成误差的主要原因是，在这种编程方案下，除被选中的单元外，其余的一些单元也会存在较小的电势差，这可能会引发错误，但按本文中的实验，所引发的错误率均在方案所设置的裕度内。
+
+- **批注：**
+
+  - **BEOL**与**FEOL**：
+    - **BEOL（back end of line）**是IC制造的第二部分，其中各个器件（晶体管，电容器，电阻器等）与晶圆上的布线（金属化层）互连。
+    - **FEOL（front end of line）**是IC制造的第一部分，其中各个组件（晶体管，电容器，电阻器等）在半导体中图案化。
+
+---
+
+# Nanosecond protonic programmable resistors for analog deep learning  
+
+><font face="Times New Roman" >Onen M, Emond N, Wang B, et al. Nanosecond protonic programmable resistors for analog deep learning[J]. Science, 2022, 377(6605): 539-543.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍一种可用于实现模拟DNN的质子可编程电阻（protonic programmable resistor），在具有良好的对称性与线性的同时能达到纳秒级的编程速度。并基于此器件讨论基于固态离子的ECRAM用于模拟人工突触的速度极限。
+
+- **内容记录：**
+
+  - **为什么要选择固态离子器件模拟人工突触**：水溶液中的离子只能实现毫秒级的反应速度，这并非是离子本身的限制，而是由于为使离子的速度更快，必然需要更大的外部电压，而液态水在高电压下会分解，从而从根本上限制了离子的速度上限。
+  - 提升器件编程速度的两大主要方向：**尽可能高的外部电压**和**尽可能小的器件尺寸**，高电压提升的是器件内粒子的驱动力，小器件尺寸缩小的是粒子的运动距离。
+  - 本文设计的质子可编程电阻的结构及TEM图像：
+
+  ![image-20220825100545730](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825100545730.png)
+
+  ​		采用$\text{Pd}$作为栅控材料，$\text{WO}_3$作为导电通道，纳米多孔PSG（无机磷硅酸盐玻璃）作为质子SE。
+
+  - 质子可编程电阻表现出的高速与低能耗的编程特性：
+
+  ![image-20220825100700793](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825100700793.png)
+
+  - 该器件的转移特性（栅控特性）：
+    $$
+    I_G(V_\text{pulse})\propto\sinh(\frac{qaV_\text{pulse}}{2k_BTd_\text{PSG}})
+    $$
+    由此得出的关系式：
+    $$
+    \Delta G=kt_\text{pulse}^\beta\sinh(\frac{qaV_\text{pulse}}{2k_BTd_\text{PSG}})
+    $$
+
+  - 在长脉宽脉冲作用下器件可能会退化，主要是由于$\text{PSG}-\text{WO}_3$界面会有太多高能质子聚集，并可能产生$\text{H}_2$：
+
+  ![image-20220825101047794](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825101047794.png)
+
+- **批注：**
+
+  - 用于模拟DNN的器件对**权重保持耐久性**与**状态切换精确性**的权衡：应当优先考虑状态切换时的精确性，因为在DNN的训练中，权重实际上是在不断更新的，我们实际上只需保证权重能够保持至下一次权重更新时即可，而无需对其进行太长时间的保存。NN训练的目的并非为了记住训练集，而是为从训练集中获取分类的依据，分类的精确性取决于对权重调整的精确性，而非记忆的持久性。
+
+  - 解释公式：
+    $$
+    \Delta G=kt_\text{pulse}^\beta\sinh(\frac{qaV_\text{pulse}}{2k_BTd_\text{PSG}})
+    $$
+    由于：
+    $$
+    I_G(V_\text{pulse})\propto\sinh(\frac{qaV_\text{pulse}}{2k_BTd_\text{PSG}})
+    $$
+    可知电导$G$为$I_G$对$V_\text{pulse}$的导数，应当正比与$\cosh(\frac{qaV_\text{pulse}}{2k_BTd_\text{PSG}})$，而$\Delta G$则为$G$对时间$t_\text{pulse}$的微分，因此会有上式。
+---
+
+# Memory-Logic Hybrid Gate with 3D-Stackable Complementary Latches for FinFET-based Neural Networks  
+
+><font face="Times New Roman" >Lee C, Chih Y D, Chang J, et al. Memory-logic hybrid gate with 3D-stackable complementary latches for FinFET-based neural networks[C]//2019 IEEE International Electron Devices Meeting (IEDM). IEEE, 2019: 38.7. 1-38.7. 4.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍一种基于FinFET调控与RRAM编程的**互补锁存器结构**（complementary latch, CL），研究了其稳定性与耐久性，并基于此对其用于3D堆叠的拓展性进行了讨论。
+
+- **内容记录：**
+
+  - 单层CL的电路原理与真值表：
+
+    ![image-20220825102422635](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825102422635.png)
+
+    当S=0，即FinFET关断时，CL处于读状态；当S=1，即FinFET开启时，CL处于写状态。
+
+  - 单层CL的物理结构与TEM图像：
+
+  ![image-20220825102452412](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825102452412.png)
+
+  - 物理结构中，Via1与M1及其中部介质构成了$R_1$与$R_2$，M2相当于电路原理图中的$Y$。
+
+  - 对器件间均匀性的测试：
+
+    ![image-20220825102618317](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825102618317.png)
+
+    虽然器件与器件间的HRS与LRS状态存在着较大的偏移，但是由于RRAM具有较大的开关比HRS/LRS，因此在CL中由于$R_1$与$R_2$的互补性，输出$Y$并不会有较大偏移：
+
+    ![image-20220825102651173](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825102651173.png)
+
+  - 3D堆叠的拓展：
+
+    ![image-20220825102714880](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825102714880.png)![image-20220825102719874](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825102719874.png)
+
+    其中M5为输出$Y$，Via3与M3构成$R_3$与$R_4$，Via1与M1分别构成$R_1$与$R_2$，$R_5$与$R_6$。
+
+- **批注：**
+
+  - 采用FinFET器件的优势：FinFET器件在抑制亚阈值电流和栅极漏电流方面有着绝对的优势。FinFET的双栅或半环栅等体鳍形结构增加了栅极对沟道的控制面积，使得栅控能力大大增强，从而可以有效抑制短沟效应，减小亚阈值漏电流。
+
+  - 使用镜像结构抑制$R_1$与$R_2$的不对称性：
+
+    ![image-20220825102841274](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825102841274.png)
+
+    这类似于差分放大器的设计思路，当某一侧的$R_1$与$R_2$因制造而存在较大差异时，另一侧的$R_1$与$R_2$便会对其进行调制。
+
+- **文章创新点：**
+
+  - 使用FinFET器件与RRAM组成TR结构，具有更好的调控性。
+  - 构造**镜像器件**减小因器件自身缺陷产生的误差。
+  - 讨论了器件用于3D堆叠的可能性。
+
+---
+
+# 3D RRAMs with Gate-All-Around Stacked Nanosheet Transistors for In-Memory-Computing  
+
+><font face="Times New Roman" >Barraud S, Ezzadeen M, Bosch D, et al. 3D RRAMs with gate-all-around stacked nanosheet transistors for in-memory-computing[C]//2020 IEEE International Electron Devices Meeting (IEDM). IEEE, 2020: 29.5. 1-29.5. 4.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍一种可进行3D堆叠的1T1R RRAM，在介绍其基本结构的同时，利用TCAD仿真对晶体管参数进行优化，最后讨论**SCL（Scouting Logic）**在该结构设计上的可行性。
+
+- **内容记录：**
+
+  - 本文介绍的1T1R RRAM的结构：
+
+    ![image-20220825103228625](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825103228625.png)
+
+    通过字线（WL）控制1T的栅极，确定选中单元的$z$坐标；通过源极线（SL）控制1R，确定选中单元的$x$坐标；通过位线（BL）与SL结合控制对单元的读写，同时确定选中单元的$y$坐标。
+
+  - 在制造RRAM时，通过将BL进行金属化，将BL的电阻率降低至原值的$10^{-3}$：
+
+  ![image-20220825103319523](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825103319523.png)
+
+  - 使用TCAD仿真对晶体管性能进行优化设计，具体包括：
+
+    1. 对通道掺杂浓度的讨论：
+
+       ![image-20220825103410093](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825103410093.png)
+
+       不同掺杂浓度下的转移特性曲线。
+
+       掺杂浓度越高，静电特性越好，但对应的$I_\text{ON}$更大，对应着更大的功耗。
+
+    2. 对导电通道宽度的讨论：
+
+       ![image-20220825103454286](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825103454286.png)![image-20220825103459456](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825103459456.png)
+
+    导电沟道宽度越宽，对应着更大的功耗，但对较窄的导电沟道，又容易引发**DIBL效应**。
+
+  - 1T1R RRAM实现SCL的原理：
+
+  ![image-20220825103550795](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825103550795.png)
+
+- **批注：**
+
+  - **DIBL效应（Drain-induced Barrier Lowering）**：在导电沟道宽度较小时，可能会引发因源漏区过于靠近而引发沟道势垒的下降，从而导致漏电的增加，同时降低Vth：
+
+  ![image-20220825103617638](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220825103617638.png)
+
+  - **SCL（Scouting Logic）**：中文直译为侦察逻辑，一种新型逻辑设计，通过对忆阻器阵列的读取，利用基尔霍夫定律与电流比较器实现任意逻辑门的功能，右图展示了AND门与OR门的实现方法。
+
+- **文章创新点：**
+
+  - 设计了可用于3D堆叠的1T1R RRAM结构。
+  - 使用TCAD对晶体管参数进行优化，节约实际实验测试的成本。
+  - 探究了基于1T1R RRAM实现SCL的可行性。同时在SCL中采用**DC（双编码）**，能取得相对**SC（单编码）**2倍的能效。
+
+---
+
