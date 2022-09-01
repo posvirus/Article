@@ -1154,3 +1154,277 @@
 
 ---
 
+# A no-verification Multi-Level-Cell (MLC) operation in Cross-Point OTS-PCM  
+
+> <font face="Times New Roman" >  Gong N, Chien W, Chou Y, et al. A no-verification multi-level-cell (mlc) operation in cross-point ots-pcm[C]//2020 IEEE Symposium on VLSI Technology. IEEE, 2020: 1-2.  </font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍一种基于OTS-PCM的MLC实现方案，并系统讨论了“1/2V”方案下的MLC操作，同时对读写过程中的**阈值电压漂移现象**进行了简要讨论。
+
+- **内容记录：**
+
+  - 基于OTS-PCM的架构设计及其进行3D堆叠后的效果：
+
+  ![image-20220901213754879](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901213754879.png)![image-20220901213810472](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901213810472.png)
+
+  - 可见在进行3D堆叠后，每条字线（WL）与位线（BL）其实都是被2层阵列所共用的。
+
+  - 对SET电压的幅值与脉宽的调试：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901213842063.png" alt="image-20220901213842063" style="zoom:150%;" />
+
+    可见，当设置时间小于300ns时，99%的阵列单元可被SET成功。
+
+  - 对OTS-PCM阵列耐久性的测试，当经过$10^9$个周期循环后，PCM的SET电压$V_\text{tS}$与RESET电压$V_\text{tR}$基本保持不变：
+
+  <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901214001194.png" alt="image-20220901214001194" style="zoom:150%;" />
+
+  - 文章讨论的两种读取方案（**DC方案**与**AC方案**）：
+
+    ![image-20220901214042166](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901214042166.png)
+
+    **DC方案**即是使用离散化的脉冲进行SET与RESET，每个脉冲的脉宽在毫秒级；**AC方案**即是使用连续变化的斜变波形进行SET与RESET，可实现小于毫秒级的反应速度。
+
+  - $V_\text{tR}$会随AC方案中SET/RESET时间的减小而增大，这可以使用OTS的**丝状开关机制（filamentary switching）**进行解释：
+
+  <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901214139907.png" alt="image-20220901214139907" style="zoom:150%;" />
+
+  - 文章讨论的两种编程方案：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901214212407.png" alt="image-20220901214212407" style="zoom:150%;" />
+
+    - **partial-SET方案：**首先使用一个恒定幅值的$V\_\text{pgm}$脉冲进行RESET，其次对SET时间进行调制。
+    - **partial-RESET方案：**首先单元需保持在SET状态，其次通过不同幅值的$V\_\text{pgm}$脉冲进行RESET。
+
+  - partial-SET方案与partial-RESET方案的效果对比：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901214357121.png" alt="image-20220901214357121" style="zoom:150%;" />
+
+    在测试效果时，为保证严谨性，使用了**开环编程（open-loop programming）**，即不会对写入的状态进行检测并重新写入（**read-verify-rewrite**），而实际应用时可以采取该种方案确保编程的准确性。
+
+  - 对OTS开关阈值电压$V_\text{t}$漂移的探究及曲线关系拟合：
+
+  <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901214453903.png" alt="image-20220901214453903" style="zoom:150%;" />
+
+- **批注：**
+
+  - 有关本文使用的**1/2V编程方案**：
+
+    基于文献：
+
+    > <font face="Times New Roman" >Chen Y C, Chen C F, Chen C T, et al. An access-transistor-free (0T/1R) non-volatile resistance random access memory (RRAM) using a novel threshold switching, self-rectifying chalcogenide device[C]//IEEE International Electron Devices Meeting 2003. IEEE, 2003: 37.4. 1-37.4. 4.</font>
+
+    给出了1/2V编程方案的具体描述：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901214709069.png" alt="image-20220901214709069" style="zoom:150%;" />
+
+    在编程时，对选中的单元所在字线施加V电压，其余字线施加1/2V电压；对选中单元位线施加0电压，其余位线施加1/2V电压。相对应地，还有1/3V方案，可以在读写时实现更低的编程电流以及更大的读取裕度：
+
+    ![fig1](C:/Users/86181/Desktop/%E4%B8%AA%E4%BA%BA%E8%B5%84%E6%96%99/TIME/Meetings/Art8/fig1.png)
+
+  - 1/2V读取方案的成功取决于读取的$V_\text{tr}$的大小，应当介于最低读取电压与最低编程电压之间：
+
+  ![fig2](https://raw.githubusercontent.com/posvirus/Image_storage/main/fig2.png)
+
+- **文章创新点：**
+
+  - 给出一种基于OTS-PCM的MLC实现方案，并系统讨论了1/2V方案下的MLC操作。
+  - 对PCM阵列的读写操作分别给出了DC/AC，partial-SET/RESET的实现方案并予以讨论。
+  - 分析了OTS开关阈值电压漂移的现象。
+
+---
+
+# An Access-Transistor-Free (OT/lR) Non-Volatile Resistance Random Access Memory (RRAM) Using a Novel Threshold Switching, Self-Rectifying Chalcogenide Device  
+
+> <font face="Times New Roman" >Chen Y C, Chen C F, Chen C T, et al. An access-transistor-free (0T/1R) non-volatile resistance random access memory (RRAM) using a novel threshold switching, self-rectifying chalcogenide device[C]//IEEE International Electron Devices Meeting 2003. IEEE, 2003: 37.4. 1-37.4. 4.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍一种基于**硫属元素化物**（chalcogenide）的RRAM阵列设计，该阵列采用无存取晶体管的设计（**0T1R, Access-Transistor-Free**），文章同时对器件特性、阵列特性与读写方案进行了讨论。
+
+- **内容记录：**
+
+  - **TF-RRAM（Transistor-Free RRAM）**的开关特性：
+
+    ![image-20220901215437586](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901215437586.png)
+
+    TF-RRAM的器件单元结构为$\text{TiW}$-$\text{GST}$材料-$\text{W}$，由于硫属元素化物材料总是包含非晶相成分，因此不会表现出在传统PCM器件中处于晶相时的欧姆特性。
+
+  - TF-RRAM器件的读写脉冲：
+
+    ![image-20220901215538289](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901215538289.png)
+
+    编程脉冲有较大的脉宽，且SET与RESET的电压幅值均大于$\text{High}\ V_\text{th}$，读取脉冲脉宽较小且电压幅值介于$\text{High}\ V_\text{th}$与$\text{Low}\ V_\text{th}$之间，因此不会导致器件发生状态切换。
+
+  - 存储器的阵列设计，讨论了1/2V与1/3V两种读取方案：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901215708042.png" alt="image-20220901215708042" style="zoom:150%;" />
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901215722322.png" alt="image-20220901215722322" style="zoom:150%;" /><img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901215727558.png" alt="image-20220901215727558" style="zoom:150%;" />
+
+    1/2V方案有较小的读取电流，1/3V方案有较大的读取裕度与较小的编程电流。
+
+  - 对器件编程脉冲的脉宽与幅值、$V_\text{th}$随编程脉冲幅值的变化，$V_\text{th}$在读写操作下的保持特性，$V_\text{th}$的耐久性进行了探究：
+
+  <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901215833350.png" alt="image-20220901215833350" style="zoom:200%;" /><img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901215853011.png" alt="image-20220901215853011" style="zoom:200%;" /><img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901215917900.png" alt="image-20220901215917900" style="zoom:200%;" /><img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901215930068.png" alt="image-20220901215930068" style="zoom:200%;" /><img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901215943039.png" alt="image-20220901215943039" style="zoom:200%;" />
+
+- **批注：**
+
+  - 标准尺寸的MOSFET所提供的电流无法实现传统PCM器件的晶相与非晶相之间的转换，因此传统的PCM器件若要使用MOSFET作为存取晶体管/选择器，则器件尺寸需要相应地放大。
+
+  - **为什么TF-RRAM可以不使用存取晶体管？**
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901220043751.png" alt="image-20220901220043751" style="zoom:200%;" />
+
+    如上图，传统PCM器件在晶相会表现出欧姆特性，自身无法实现整流（**Self-Rectify**），而对TF-RRAM，由于硫属元素化物材料总是包含非晶相成分因此总可以实现整流，因此无需外加存取晶体管辅助整流。
+
+    另外，由于TF-RRAM的这种特性（及其**较小的亚阈区电流**与**较大的开关比**），该器件也常用于整流。
+
+- **文章创新点：**
+
+  - 给出了一种无需存取晶体管的TF-RRAM设计。
+  - 对器件/阵列特性进行全面分析。
+
+---
+
+#MLC PCM Techniques to Improve Nerual Network Inference Retention Time by $10^5$X and Reduce Accuracy Degradation by 10.8X  
+
+> <font face="Times New Roman" >Khwa W S, Akarvardar K, Chen Y S, et al. MLC PCM Techniques to Improve Nerual Network Inference Retention Time by 105X and Reduce Accuracy Degradation by 10.8 X[C]//2021 Symposium on VLSI Technology. IEEE, 2021: 1-2.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍了3种用于优化MLC PCM的方案，以解决MLC PCM在神经网络应用中所面对的挑战。
+
+- **内容记录：**
+
+  - PCM可选择的两种MLC方案：
+
+    ![image-20220901220353368](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901220353368.png)
+
+    第一种方案是对PCM的MLC状态完全精确的描述，即各状态间不存在重叠，这种方案不存在信息缺失，但对设备的要求很高；第二种方案是对PCM的MLC状态有重叠地描述，这种方案可实现更高密度的存储，但会有一定的信息缺失。
+
+  - 研究发现，重叠的 MLC 状态可以被神经网络的容错特性所容忍。
+
+  - MLC PCM在神经网络应用中所面临的3个挑战：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/%E8%9C%82%E8%9C%9C%E6%B5%8F%E8%A7%88%E5%99%A8_fig3.jpg" alt="蜂蜜浏览器_fig3" style="zoom:80%;" />
+
+    1. 对不同设备性能需求的不平衡。
+    2. 不同MLC状态的出现概率不均匀。
+    3. 不同MLC状态的保持特性不同。
+
+  - 表示不同位数的MLC状态的误码率会对NN的精度有不同的影响：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901220635753.png" alt="image-20220901220635753" style="zoom:150%;" /><img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901220642119.png" alt="image-20220901220642119" style="zoom:150%;" />
+
+    整体来说，处于低位的状态发生误码，对权重整体的数值影响不大，因此对NN的精度影响较小，处于高位的状态发生误码，对权重的数值影响较大，因此对NN的精度影响较大。
+
+  - 为解决MLC PCM在NN应用中的挑战，所提出的3个解决方案：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901220727171.png" alt="image-20220901220727171" style="zoom:150%;" />
+
+    1. **DRB：**将高位与低位相互配对，使用一个PCM器件进行表示，降低对每个PCM器件误码率的限制。
+    2. **PMR：**通过统计高位（W[6]与W[7]）二进制组合出现的概率，自行对器件的状态进行修正。
+    3. **BPP：**通过调整MLC的状态分布，使高位具有更大的读取裕度，从而降低高位的误码率（BER）。
+
+- **批注：**
+
+  - 对PMR的进一步说明：
+    PMR指通过统计高位（W[6]与W[7]）二进制组合出现的概率，自行对器件的状态进行修正。在本文中，W[6]=W[7]的概率高达94.28%，因此可通过W[6]的状态对W[7]的状态进行修正，以降低W[7]的BER。
+  - 相对而言，在传统方案中，由于描述高位的PCM器件发生误码后对权重数值的影响大，因此对该PCM器件BER的要求更为严格。
+
+- **文章创新点：**
+
+  - 针对MLC PCM在NN应用中的挑战进行了较为全面的分析。
+  - 为解决MLC PCM在NN应用中的挑战，分别提出了DBR、PMR、BPP共3个解决方案。
+
+
+---
+
+# Characterizing Endurance Degradation of Incremental Switching in Analog RRAM for Neuromorphic Systems  
+> <font face="Times New Roman" >Zhao M, Wu H, Gao B, et al. Characterizing endurance degradation of incremental switching in analog RRAM for neuromorphic systems[C]//2018 IEEE International Electron Devices Meeting (IEDM). IEEE, 2018: 20.2. 1-20.2. 4.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍了一种用于测试模拟RRAM**耐久性（endurance）**的测试平台，并基于该平台对模拟RRAM的耐久性进行了较为全面的研究与表征。
+
+- **内容记录：**
+
+  - 部分NN推理任务对RRAM阵列的耐久性需求：
+
+    ![image-20220901221223691](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901221223691.png)
+
+    通常，**用于数据存储**的RRAM的耐久性在$10^5-10^7$个循环左右，但通过**弱编程脉冲**实现模拟权重的**增量更新（incremental switching）**，可以提升RRAM的耐久性。
+
+  - 表征模拟RRAM耐久性的挑战：
+
+    1. 难以控制RRAM在指定的电阻窗口内发生模拟切换。
+    2. 缺少有效的耐久性衡量标准。
+    3. 测试的时间问题，统计与测量需要较长时间。
+
+  - 使RRAM在指定电阻窗口内发生模拟切换的解决方法：使用**可变电压脉冲**对RRAM单元进行SET/RESET，并在每个循环后对编程脉冲的幅值进行**反馈修正**：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/%E8%9C%82%E8%9C%9C%E6%B5%8F%E8%A7%88%E5%99%A8_fig4.jpg" alt="蜂蜜浏览器_fig4" style="zoom:80%;" />
+
+    每次编程结束后，观察RRAM阻态是否落在电阻窗口内，若不是，则通过修正源/漏极电压来修正编程脉冲。
+
+  - 在能够控制电阻窗口后，对不同电阻窗口对应的耐久性进行测试：
+
+    ![image-20220901221545786](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901221545786.png)![image-20220901221550632](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901221550632.png)![image-20220901221605901](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901221605901.png)![image-20220901221611255](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901221611255.png)
+
+    1. 不同大小的电阻窗口，小电阻窗口的耐久性更优。
+    2. 固定LRS，HRS越大，耐久性越差。
+    3. 固定HRS，LRS的变化与耐久性基本无关。（与2结合可知HRS对耐久性的影响更大）
+
+  - 因此，为获得更好的编程耐久性，在编程时应选用**电阻水平较小、较窄的电阻窗口**进行编程。
+
+  - 对**HRS对耐久性的影响更大**的解释：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901221753969.png" alt="image-20220901221753969" style="zoom:150%;" />
+
+    当RRAM处于HRS（使用**full window**进行编程）时，电场集中于一个很小的间隙区域（gap），因此会对RRAM的材料特性造成较为严重的损害，降低其耐久性。而处于其他状态的RRAM电场分布则较为均匀。
+
+  - 使用弱编程脉冲进行模拟RRAM编程时，耐久性可提升至$10^{11}$以上：
+
+    ![image-20220901221849238](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901221849238.png)
+
+    但我们不能只关注RRAM的耐久性，在NN应用中，RRAM实现权重更新的对称性与线性也会随编程周期数的增加而退化：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901221909545.png" alt="image-20220901221909545" style="zoom:150%;" />
+
+    当编程周期数大于$10^7$时，权重更新的线性与对称性均有较为明显的退化，此时虽然仍可用于NN训练，但对应的训练精度会下降。
+
+  - RRAM耐久性下降对NN精度的影响：
+
+    ![image-20220901221946216](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901221946216.png)
+
+    **低电阻，小窗口**是NN训练的最佳条件，因其具有**最高的准确性**与**最长的耐久时间**。
+
+  - 新定义**累积电导（accumulated $\Delta G$）**的概念来标准模拟RRAM的耐久性：
+
+    ![image-20220901222125001](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220901222125001.png)
+
+    累积电导指在一次NN训练过程中，每次模拟权重更新时电导增量的代数和，一般来说其是均会分布于一个确定的范围内，如果累积电导超出了该范围，则器件很有可能耐久性受到了破坏。
+
+- **批注：**
+
+  - **耐久性（edurance）**通常用器件特性得以维持的最大编程周期数来衡量；**保持特性（retention）**通常用器件在不进行编程时，其状态不发生退化的最大时间来衡量。
+  - RRAM在用作存储器件时，为保证存储数据的准确性，通常采用**大电阻窗口（full window）**，并对每个器件使用强电压脉冲进行二进制编程（即只有LRS与HRS），而在用于NN训练时则采用弱电压脉冲的模拟编程。
+
+- **文章创新点：**
+
+  - 设计并制作了用于模拟RRAM耐久性测试的测试平台，并使用该平台实现了对RRAM电阻窗口的控制。
+  - 针对不同电阻窗口RRAM的耐久性进行了全面测试，最终确定低电阻，小窗口是模拟RRAM用于NN训练的最佳条件。
+  - 提出了累积电导的概念，用于衡量模拟RRAM的耐久性。
+
+---
+
