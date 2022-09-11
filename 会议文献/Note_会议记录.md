@@ -1428,3 +1428,289 @@
 
 ---
 
+# Compute-in-Memory with Emerging Nonvolatile-Memories: Challenges and Prospects  
+
+><font face="Times New Roman" >Yu S, Sun X, Peng X, et al. Compute-in-memory with emerging nonvolatile-memories: Challenges and prospects[C]//2020 ieee custom integrated circuits conference (cicc). IEEE, 2020: 1-4.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍了CIM芯片与eNVM的最新进展，以及对各大厂商生产的eNVM芯片的性能分析与比较。同时，文中也重点探讨了eNVM用于机器学习领域所面临的3个重要挑战。
+
+- **内容记录：**
+
+  - GPU是现在用于加速深度学习的主流平台，但对于传统的GPU而言，在实现矩阵向量乘法的MAC运算时，NN权重、输入与输出数据均会在全局缓冲区与MAC阵列中进行移动，因此。为减少数据移动，将MAC运算直接嵌入至内存阵列中是一个十分有吸引力的方案。
+
+  - 现在较为成熟的CIM技术是基于**SRAM**实现的，但有以下不可忽视的缺点：
+
+    1. SRAM本质上是易失性的，有用于保持数据的静态功耗。
+    2. SRAM在保持数据时具有不可忽视的泄漏功耗。
+
+    因此，相比SRAM，eNVM在对芯片面积/功耗有更严格限制的场景中，有更好的应用前景。
+
+  - 各大厂商基于eNVM的CIM芯片原型设计：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911205920959.png" alt="image-20220911205920959" style="zoom: 150%;" />
+
+    IBM最先于2015年设计了基于PCM的CIM芯片，但受限于权重更新时的非对称性与漂移，训练精度十分有限（82.9%）。
+
+  - 一个典型的基于eNVM的CIM芯片设计（ASU/GaTech’s RRAM CIM）：
+
+    ![image-20220911210036480](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911210036480.png)
+
+    这种主流设计主要存在下列问题：
+
+    1. **电平转换器**（level shifter）在芯片中占据着不可忽视的空间。
+    2. RRAM阵列末尾的ADC占据的空间甚至大于RRAM阵列本身，很难实现良好的间距匹配。
+    3. CIM芯片的推理精度仍因非理想因素的存在而有待提高。
+
+  - 基于eNVM的CIM芯片设计所面临的3个重大挑战：
+
+    - **挑战1：器件开态时的低电阻与较高的编程电压。**
+
+      器件处于开态时的低电阻会导致阵列WL/BL上的电压降明显上升，从而导致权重更新的误差增大，最终导致训练/推理的精度下降。
+
+      同时RRAM具有较高的编程电压，编程电压水平显著高于逻辑电平，因此需要外加电平转换器来满足编程所需的电压，这又会占用额外的面积。同时，对不同开态电阻$R_\text{on}$与编程电压$V_\text{w}$的eNVM阵列设计进行仿真：
+
+      ![image-20220911210255076](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911210255076.png)
+
+      提升$R_\text{on}$有助于减少读写能耗，同时对读写延迟的影响较小；降低$V_\text{w}$可以直接降低写入能耗，并通过消除电平转换器来减少读取延迟与芯片面积。
+
+    - **挑战2：ADC的面积占用与功耗。**
+
+      应用于CIM芯片设计的ADC的需求较为特殊，由于神经网络的容错性，一般ADC**不需要很高的精度**，但相对应地，**CIM芯片对ADC面积有严格的限制**，这主要是因为eNVM阵列较为紧凑，如果ADC的面积很大，而每一列又需要于一个ADC相匹配，这将无法实现很好的间距分配。
+
+      对2种ADC（flash-ADC/SAR-ADC）的对比：
+
+      <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911210406437.png" alt="image-20220911210406437" style="zoom:150%;" />
+
+      SAR-ADC相比flash-ADC拥有较小的面积与功耗，但相对却有较高的延迟。
+
+      ADC可使用电流模式/电压模式的比较器进行制作：
+
+      <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911210437310.png" alt="image-20220911210437310" style="zoom:150%;" />
+
+    - **挑战3：模拟运算时的误差。**
+
+      CIM在进行模拟运算时，主要会有以下误差：**不同器件单元间$R_\text{on}$的不均匀**与**ADC的offset error**。
+
+      不同器件单元间Ron的不均匀性可通过**在编程后进行验证校准**解决（iterative write-verify technique），而ADC的offset error可通过修改器件尺寸、在算法层面设计新型算法进行解决。
+
+- **文章创新点：**
+
+  - 对比了基于SRAM与基于eNVM的CIM芯片原型设计的优缺点，指出了其应用场景。
+  - 指出了基于eNVM的CIM芯片原型设计所面临的3个重要挑战，并基于这些挑战预测了CIM芯片未来的发展方向。
+
+
+---
+
+#Experimental Demonstration of Conversion-Based SNNs with 1T1R Mott Neurons for Neuromorphic Inference    
+
+><font face="Times New Roman" >Zhang X, Wang Z, Song W, et al. Experimental demonstration of conversion-based SNNs with 1T1R mott neurons for neuromorphic inference[C]//2019 IEEE International Electron Devices Meeting (IEDM). IEEE, 2019: 6.7. 1-6.7. 4.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍了一种基于**Mott忆阻器**与1T1R阵列，用于**SNN**推理的CIM芯片，其相对传统的基于晶体管的CIM芯片具有更高的可扩展性与能效，同时也表现出可观的推理精度。
+
+- **内容记录：**
+
+  - 在算法层面上，SNN具有两个显著的限制：
+
+    1. 缺乏有效的训练算法，现有的SNN训练算法基本是通过传统的BP算法进行参数映射得到的。
+    2. 缺乏基于脉冲进行表征的训练数据集。
+
+  - 基于Mott忆阻器与1T1R阵列的SNN硬件设计：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911210908594.png" alt="image-20220911210908594" style="zoom:150%;" />
+
+    通过模拟量表征的向量输入RRAM阵列，再通过SL末尾的Mott神经元设计将模拟输入转化为脉冲输出以实现SNN。
+
+  - Mott忆阻器的设计（Si/NbOx/TiN）及其开关特性：
+
+  <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911210942728.png" alt="image-20220911210942728" style="zoom:200%;" />
+
+  - 对Mott神经元性能的测试：
+
+    ![image-20220911211012727](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911211012727.png)![image-20220911211019944](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911211019944.png)![image-20220911211025584](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911211025584.png)
+
+    三张图分别展示了Mott神经元$V_\text{th}$与$V_\text{hold}$良好的不变性与耐久性，以及器件与器件间的均匀性。
+
+  - 本文中设计的Mott神经元：
+
+    ![image-20220911211115778](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911211115778.png)
+
+    器件直接使用寄生电容储存电荷，减少了电容器的使用从而提升了阵列的可扩展性。同时，可通过不同的Input控制MOSFET的沟道电阻，从而使SNN的脉冲频率可变。
+
+  - 可用于多任务处理的X-bar阵列设计：
+
+  ![image-20220911211142058](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911211142058.png)
+
+- **批注：**
+
+  - 在本文的设计中，RRAM阵列的输入以及内部的MVM运算仍是模拟量，这有效解决了缺乏基于脉冲进行表征的训练数据集的问题。
+
+  - **TIA**：跨阻放大器（Transimpedance Amplifier），其实就是比例器。
+
+  - 本文中的NN使用的激活函数为$ReLU$，$ReLU(x)=\max{x,0}$，在本文的SNN中，输入为Mott神经元的**栅极电压**，输出为**脉冲频率**。
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911211314563.png" alt="image-20220911211314563" style="zoom:150%;" />
+
+    当然，由于Mott材料的切换需发生的一定的电压偏置下，因此本文首先在对Mott忆阻器加入了1.81V的电压偏置。
+
+  - 在多任务处理的X-bar阵列设计中，每一行/多行的多层用于实现一个任务。
+
+- **文章创新点：**
+
+  - 率先通过实验验证了可用于实现SNN推理的硬件设计。
+  - 通过使用**Conversion-Based SNN**解决了缺乏脉冲形式数据集的问题。
+  - 通过改进Mott神经元设计（利用寄生电容）提升扩展性。
+
+
+---
+#An Artificial Neuron Based on a Threshold Switching Memristor    
+
+><font face="Times New Roman" >Zhang X, Wang W, Liu Q, et al. An artificial neuron based on a threshold switching memristor[J]. IEEE Electron Device Letters, 2017, 39(2): 308-311.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍一种基于**TSM（Threshold Switching Memristor）**材料的人工神经元，可对实际神经元的4种重要特性进行模拟。
+
+- **内容记录：**
+
+  - 基于脉冲神经网络（SNN）的类脑运算因其**较低的能耗**和**与生物神经元的较高相似度**而受到了广泛关注。
+
+  - 现阶段使用CMOS电路设计的人工神经元组成部分太多，无法集成，本文给出一种基于$\text{Ag}/\text{SiO}_2/\text{Au}$的TSM神经元设计。
+
+  - 该神经元属于**IF（integration-and-fire）**神经元，即通过积累电荷，当电荷积累到一定阈值时，神经元被激活并向后方神经元发送脉冲。
+
+  - 实际神经元与本文设计的TSM神经元的对比：
+
+    ![image-20220911211654678](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911211654678.png)
+
+    实际上，对人工神经网络的设计设计两个关键要素：**神经元**（Neuron）与**突触**（Synapse），突触通常通过一个**忆阻器阵列**进行模拟，这模拟的是**Pre-Neuron**与**Post-Neuron**之间两两形成的突触网络，神经元则使用**忆阻器构成的电路**加在忆阻器阵列的末端，模拟突触所连接的神经元。
+
+  - 本文基于TSM忆阻器设计的IF神经元：
+
+    ![image-20220911211738312](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911211738312.png)
+
+    神经元的输入为模拟电压脉冲，输出为一定频率的尖峰脉冲（spike），同时，该神经元电路分别具有**充电循环**（CL）与**放电循环**（DL）。
+
+  - TSM神经元的基本工作过程：
+
+    ![image-20220911211811649](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911211811649.png)
+
+    首先，在初始状态，忆阻器处于HRS（$R_\text{H}$），24支路近似于开路，此时输入模拟电压脉冲，给电容$C$进行充电，时间常数为$R_SC$，而在电压脉冲未输入时，电容$C$会放电，放电的时间常数为$(R_\text{H}+R_S)C$，而$(R_\text{H}+R_S)C$远大于$R_SC$，这说明流失一定量的电荷所需的时间远大于积累等量电荷的时间。因此在一系列连续电压脉冲的作用下，$C$会不断被充电，直至结点2的电压能够使忆阻器发生切换，由HRS切换至LRS（$R_\text{L}$）。
+
+    而在忆阻器发生切换后，$R_o$上的电压发生突变，并随电容$C$的放电减小至0，此即在输出端产生一尖峰脉冲。
+
+  - TSM神经元对神经元特性的模拟：
+
+    - SM神经元满足**all-or-none定律**：由于忆阻器切换行为的发生必须要达到一定的阈值电压，且当电压高于阈值电压时，忆阻器的电阻保持不变。
+    - TSM神经元能够实现通过阈值电压进行调控的尖峰脉冲输出。
+    - TSM神经元具有**不应期**：当忆阻器由HRS切换至LRS时，回路2432发生DL，其时间常数(RL+Ro)Cs是很小的，这就导致此时若存在模拟电压脉冲输入，在C上积累的电荷会迅速通过DL过程流失，从而实现神经元所谓的**不应期**。
+    - (1)   神经元输出尖峰脉冲的频率可通过输入电压脉冲的幅值进行调制（**strength-modulated frequency response**）：
+
+    ![image-20220911212108820](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911212108820.png)
+
+  - 使用TSM神经元实现一个简单的数字识别系统，证明了其用于实现SNN的可行性：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911212142678.png" alt="image-20220911212142678" style="zoom:150%;" />
+
+    该系统的权重矩阵直接通过MATLAB进行训练给出，实际测试的仅仅是该SNN对数字的识别精度：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911212157496.png" alt="image-20220911212157496" style="zoom:150%;" />
+
+    最终实验结果表明，SNN能够正确识别数字，但这实际上相当于直接将训练集作为测试集，所以对基于TSM神经元实现的SNN的精度还缺乏进一步的探究。
+
+- **批注：**
+
+  - **all-or-none law**：神经传导的一项基本特性。即当刺激达到神经元的反应阈限时，它便以最大的脉冲振幅加以反应；但刺激强度如达不到某种阈限时，神经元便不发生反应。
+  - 对本文中的TSM神经元而言，当结点2的电压低于忆阻器发生切换的阈值电压时，便不会有尖峰脉冲输出，而一旦结点2的电压高于阈值电压，无论高出多少，TSM神经元均输出相同幅值的尖峰脉冲，因为忆阻器的$R_\text{L}$是一个常数。
+
+- **文章创新点：**
+
+  - 设计了一种基于TSM材料的IF神经元，并能仿真生物神经元的若干重要特性。
+  - 使用TSM神经元实现一个简单的数字识别系统，证明了其用于实现SNN的可行性。
+
+
+---
+#Fully Memristive SNNs with Temporal Coding for Fast and Low-power Edge Computing  
+
+><font face="Times New Roman" >Zhang X, Wu Z, Lu J, et al. Fully memristive SNNs with temporal coding for fast and low-power edge computing[C]//2020 IEEE International Electron Devices Meeting (IEDM). IEEE, 2020: 29.6. 1-29.6. 4.</font>
+
+---
+
+- **写作目的：**
+
+  本文主要介绍一种基于$\text{NbO}_\text{x}$忆阻器的**LIF神经元**设计，可用于实现基于**时间编码（temporal coding）**的SNN，并最终通过人脸识别任务对设计可行性进行了验证。
+
+- **内容记录：**
+
+  - 基于**时间编码（temporal coding）**的TC SNN与基于**频率编码（rate coding）**的RC SNN的对比：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911212625925.png" alt="image-20220911212625925" style="zoom:150%;" />
+
+    RC SNN会使用尖峰脉冲的频率对数据进行编码，这意味着对一个数据的描述涉及对一段较长时间内若干尖峰脉冲出现频率的记录，这会导致**较高的能耗**与**较长的反应时间与推理时间**。而TC SNN采用时间进行编码，本文中使用**单尖峰方案（one-spike scheme）**，在减小能耗的同时也缩短了反应时间，同时由于尖峰较为稀疏，对设备的**耐久性需求**也相应降低：
+
+    ![image-20220911212653672](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911212653672.png)
+
+    另外，与先前基于RC SNN的神经元设计对比，本文中的LIF神经元的激活是**电流驱动**的（current-driven），这意味着该神经元无需offset电压，拥有较低的编程电压。
+
+  - 基于$\text{NbO}_\text{x}$的**LIF（leaky integrate-and-fire）神经元**设计及NbOx忆阻器的性能测试：
+
+    ![image-20220911212833684](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911212833684.png)![image-20220911212841091](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911212841091.png)![image-20220911212848414](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911212848414.png)
+
+    分别测试了**器件开关的耐久性**，**阈值电压的耐久性**与**器件与器件间阈值电压的均匀性**。
+
+  - 本文设计的电流驱动的LIF神经元：
+
+    <img src="https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911212918274.png" alt="image-20220911212918274" style="zoom:150%;" />
+
+    该神经元是在用于RC SNN的RC neuron的基础上改进得到的，在RC neuron上外加一个D触发器与一个**TG**（传输门），使用电流给电容C充电，当忆阻器发生切换，输出端产生第一个尖峰脉冲后，D触发器同时被尖峰的边沿触发，进一步触发TG，TG相当于一个理想开关，D触发器使TG被开路，从而断开了输入，使神经元处于不应期，同时保证神经元仅有单尖峰脉冲输出。此时电容C开始放电，为进一步加速放电速度，外加了一个nMOSFET辅助放电：
+
+    ![image-20220911213017343](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911213017343.png)
+
+    在未加MOSFET时，放电的时间在30000ns左右，而加入后缩短为15ns左右。
+
+    上图同样给出了电流强度对尖峰的调制，**较大的电流强度有利于缩短神经元的反应时间**。
+
+  - 电流驱动的RC neuron与TC neuron的对比：
+
+    ![image-20220911213107686](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911213107686.png)
+
+    读图可知，TC neuron的工作范围要远大于RC neuron这意味着TC neuron可支持更大的突触阵列。
+
+  - 使用LIF神经元实现人脸识别任务：
+
+    ![image-20220911213139012](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911213139012.png)
+
+    对本文使用的LIF神经元抽象出的数学模型，利用该模型进行SNN的训练。
+
+    ![image-20220911213151737](https://raw.githubusercontent.com/posvirus/Image_storage/main/image-20220911213151737.png)
+
+    训练后的SNN阵列对5张人脸图像的识别达到了100%的精确度。
+
+- **批注：**
+
+  - **时间编码（temporal coding）**：SNN的时间编码方式有多种，本文中所采用的单尖峰方案（one-spike scheme）应该是通过神经元接收首次脉冲的时刻来对数据进行编码，文献：
+  
+    > <font face="Times New Roman" >Kheradpisheh S R, Masquelier T. Temporal backpropagation for spiking neural networks with one spike per neuron[J]. International Journal of Neural Systems, 2020, 30(06): 2050027.</font>
+  
+    对这种方法有更为详细的说明。
+  
+  - **current-driven**与**voltage-driven**：由于IF/LIF神经元产生尖峰输出的物理机制类似，都是通过忆阻器达阈值电压后发生切换行为，但电压驱动的神经元往往需要先施加一个offset电压将忆阻器的电压抬至阈值附近，而电流驱动则不需要。
+  
+  - **推理**（inference）与**训练**（training）：用于NN应用的忆阻器阵列一般分两种，一种是仅用于已知任务的推理，即阵列单元的权重已经通过软件训练得出，该阵列只需将已知的权重编程至各器件单元上，执行推理任务即可，另一种则需要支持硬件上的训练工作。
+
+- **文章创新点：**
+
+  - 提出了一种基于$\text{NbO}_\text{x}$忆阻器的LIF神经元设计，可用于实现基于时间编码（temporal coding）的SNN，具有低功耗，高速的特性。
+  - 使用设计的SNN阵列进行人脸识别任务，验证设计的可行性。
+
+
+---
